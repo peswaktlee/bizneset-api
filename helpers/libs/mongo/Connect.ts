@@ -12,10 +12,18 @@ import {
 const Connect = async (_: Context | null, next: Next | null): Promise<void> => {
     const USERNAME = MONGO_DB_ADMIN
     const PASSWORD = MONGO_DB_PASSWORD
-    const CLUSTER_DOMAIN = MONGO_CLUSTER
+    const CLUSTER = MONGO_CLUSTER
     const DATABASE_NAME = MONGO_DB_NAME
 
-    const URI = `mongodb+srv://${USERNAME}:${PASSWORD}@${CLUSTER_DOMAIN}/${DATABASE_NAME}?retryWrites=true&w=majority`
+    console.log({
+        USERNAME,
+        PASSWORD,
+        MONGO_CLUSTER,
+        DATABASE_NAME
+    })
+
+    const URI = `mongodb+srv://${USERNAME}:${PASSWORD}@${CLUSTER}/${DATABASE_NAME}?retryWrites=true&w=majority`
+    console.log(URI)
     await connect(URI)
 
     if (next) await next()
