@@ -12,6 +12,7 @@ import {
     Logs, 
     Users 
 } from '@/router'
+import { Connect } from '@/helpers/libs/mongo'
 
 const app = new Hono()
 
@@ -28,6 +29,8 @@ ApplyGlobalMiddlewares(GROUP_ROUTES.LOGS, Logs())
 ApplyGlobalMiddlewares(GROUP_ROUTES.USERS, Users())
 
 app.notFound(CatchAll)
+
+Connect(null, null)
 
 export const POST = handle(app)
 export const GET = handle(app)
