@@ -1,0 +1,37 @@
+{
+  "name": "bizneset-api",
+  "version": "0.0.0",
+  "scripts": {
+    "api:local": "npm run www:check && env-cmd -f .env.local next dev --port 5500",
+    "api:dev": "npm run www:check && env-cmd -f .env.dev next dev --port 5500",
+    "api:prod": "npm run www:check && env-cmd -f .env.prod next dev --port 5500",
+    "www:build": "npm run www:check && next build",
+    "www:start": "next start --port 4400",
+    "www:tsc": "tsc --noEmit",
+    "www:lint": "eslint . --ext .ts,.tsx",
+    "www:lint:fix": "eslint . --ext .ts,.tsx --fix",
+    "www:unimported": "unimported",
+    "www:knip": "knip",
+    "www:check": "npm run www:lint && npm run www:tsc"
+  },
+  "dependencies": {
+    "hono": "^4.6.12",
+    "moment-timezone": "^0.5.46",
+    "firebase-admin": "^11.11.1",
+    "mongoose": "^8.3.4",
+    "next": "14.2.5",
+    "@aws-sdk/client-s3": "^3.616.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "zod": "^3.23.8",
+    "sharp": "^0.33.5"
+  },
+  "devDependencies": {
+    "@types/node": "18.11.18",
+    "@types/react": "18.0.26",
+    "@types/react-dom": "18.0.10",
+    "eslint": "^8",
+    "eslint-config-next": "15.0.3",
+    "typescript": "^5"
+  }
+}
