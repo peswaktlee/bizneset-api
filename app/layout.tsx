@@ -1,5 +1,4 @@
-import type { Metadata } from 'next'
-import type { FC } from 'react'
+import type { Metadata, FC } from 'next'
 import type { RootLayout } from '@/ts'
 
 import { Translation } from '@/helpers/generals'
