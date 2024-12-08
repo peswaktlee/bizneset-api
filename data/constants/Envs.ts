@@ -6,6 +6,7 @@ export const ENV: string = process.env.ENV as string
 export const ORIGINS: string = process.env.ORIGINS as string
 export const SECRET_KEY: string = process.env.SECRET_KEY as string
 export const DECRYPT_KEY: string = process.env.DECRYPT_KEY as string
+export const PUBLIC_SITE: string = process.env.PUBLIC_SITE as string
 
 // Mongo
 export const MONGO_CLUSTER: string = process.env.MONGO_CLUSTER as string
