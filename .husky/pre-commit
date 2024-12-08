@@ -1,8 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
 
-current_version=$(jq -r '.version' package.json)
-IFS='.' read -r -a version_parts <<< "$current_version"
-version_parts[2]=$((version_parts[2] + 1))
-new_version="${version_parts[0]}.${version_parts[1]}.${version_parts[2]}"
-jq --arg new_version "$new_version" '.version = $new_version' package.json > package.tmp.json && mv package.tmp.json package.json
-git add package.json package-lock.json
+npm version patch --no-git-tag-version && git add package.json && git add package-lock.json
