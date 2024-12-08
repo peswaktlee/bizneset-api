@@ -14,8 +14,7 @@ module.exports = {
     ".next",
   ],
   rules: {
-    "react-hooks/exhaustive-deps": "off",
-    "@next/next/no-img-element": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
     indent: ["error", 4],
     "linebreak-style": "off",
     quotes: ["error", "single"],
@@ -23,4 +22,4 @@ module.exports = {
     "comma-dangle": ["error", "never"],
     "jsx-quotes": ["error", "prefer-single"],
   }
-}
+};
