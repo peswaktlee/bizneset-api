@@ -7,6 +7,7 @@ import { LoginUser, RegisterUser } from '@/helpers/users'
 import { AUTH_USER_SELECTOR, CONTEXT_KEYS } from '@/data/constants'
 
 const AuthUser = async (c: Context) => {
+    console.log('AuthUser')
     try {
         const uid = c.get(CONTEXT_KEYS.UID)
         
