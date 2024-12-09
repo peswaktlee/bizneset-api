@@ -5,15 +5,13 @@ const CategoryStructure: Schema<CategoryInterface> = new Schema(
     {
         Name: {
             type: String,
-            required: false,
-            unique: false,
-            default: null
+            required: true,
+            unique: true
         },
         Slug: {
             type: String,
-            required: false,
-            unique: false,
-            default: null
+            required: true,
+            unique: true
         },
         Businesses: {
             type: Number,
@@ -23,13 +21,14 @@ const CategoryStructure: Schema<CategoryInterface> = new Schema(
         },
         Created_At: {
             type: Date,
-            required: false,
+            required: true,
             unique: false
         },
         Updated_At: {
             type: Date,
             required: false,
-            unique: false
+            unique: false,
+            default: null
         }
     },
     {

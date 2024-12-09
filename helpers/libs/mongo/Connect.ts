@@ -15,15 +15,7 @@ const Connect = async (_: Context | null, next: Next | null): Promise<void> => {
     const CLUSTER = MONGO_CLUSTER
     const DATABASE_NAME = MONGO_DB_NAME
 
-    console.log({
-        USERNAME,
-        PASSWORD,
-        MONGO_CLUSTER,
-        DATABASE_NAME
-    })
-
     const URI = `mongodb+srv://${USERNAME}:${PASSWORD}@${CLUSTER}/${DATABASE_NAME}?retryWrites=true&w=majority`
-    console.log(URI)
     await connect(URI)
 
     if (next) await next()

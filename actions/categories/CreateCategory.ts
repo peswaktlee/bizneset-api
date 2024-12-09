@@ -15,7 +15,6 @@ const CreateCategory = async (c: Context) => {
         if (isAdmin) {
             const { Name, Slug } = await DecodeBody(c)
 
-
             const nameValidation = CategoryNameValidation(Name)
             const slugValidation = CategorySlugValidation(Name)
 
@@ -23,8 +22,7 @@ const CreateCategory = async (c: Context) => {
                 const category = await CategoryModel.create({
                     Name,
                     Slug,
-                    Created_At: CurrentTimestamp(),
-                    Updated_At: CurrentTimestamp()
+                    Created_At: CurrentTimestamp()
                 })
 
                 if (category) {
