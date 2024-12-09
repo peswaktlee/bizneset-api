@@ -6,7 +6,7 @@ import { Connect } from '@/helpers/libs/mongo'
 import { CreateCategory, ListCategories } from '@/actions/categories'
 import { CATEGORIES_ROUTES } from '@/data/constants'
 
-const NotificationsRouter = (): HonoBase => {
+const CategoriesRouter = (): HonoBase => {
     const router = new Hono()
 
     router.post(
@@ -19,11 +19,10 @@ const NotificationsRouter = (): HonoBase => {
     router.post(
         CATEGORIES_ROUTES.LIST_CATEGORIES,
         Connect,
-        AuthMiddleware,
         ListCategories
     )
 
     return router
 }
 
-export default NotificationsRouter
+export default CategoriesRouter

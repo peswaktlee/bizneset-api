@@ -8,7 +8,7 @@ const ListCategories = async (c: Context) => {
     try {
         const categories = await GetCategories()
 
-        if (Array.isArray(categories)) {
+        if (categories && Array.isArray(categories)) {
             if (categories?.length > 0) return await HttpResponder({
                 c,
                 success: true,

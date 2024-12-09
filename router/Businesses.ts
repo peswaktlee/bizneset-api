@@ -13,16 +13,45 @@ import {
     ListUserBusinesses
 } from '@/actions/businesses'
 
-const PostsRouter = (): HonoBase => {
+const BusinessesRouter = (): HonoBase => {
     const router = new Hono()
 
-    router.post(BUSINESSES_ROUTES.CREATE_BUSINESS, Connect, AuthMiddleware, CreateBusiness)
-    router.post(BUSINESSES_ROUTES.DELETE_BUSINESS, Connect, AuthMiddleware, DeleteBusiness)
-    router.post(BUSINESSES_ROUTES.LIST_BUSINESSES, Connect, AuthMiddleware, ListBusinesses)
-    router.post(BUSINESSES_ROUTES.LIST_BUSINESSES, Connect, AuthMiddleware, ListBusiness)
-    router.post(BUSINESSES_ROUTES.LIST_USER_BUSINESSES, Connect, AuthMiddleware, ListUserBusinesses)
+    router.post(
+        BUSINESSES_ROUTES.CREATE_BUSINESS, 
+        Connect, 
+        AuthMiddleware, 
+        CreateBusiness
+    )
+
+    router.post(
+        BUSINESSES_ROUTES.DELETE_BUSINESS, 
+        Connect, 
+        AuthMiddleware, 
+        DeleteBusiness
+    )
+
+    router.post(
+        BUSINESSES_ROUTES.LIST_BUSINESSES, 
+        Connect, 
+        AuthMiddleware, 
+        ListBusinesses
+    )
+
+    router.post(
+        BUSINESSES_ROUTES.LIST_BUSINESSES, 
+        Connect, 
+        AuthMiddleware, 
+        ListBusiness
+    )
+
+    router.post(
+        BUSINESSES_ROUTES.LIST_USER_BUSINESSES, 
+        Connect, 
+        AuthMiddleware, 
+        ListUserBusinesses
+    )
 
     return router
 }
 
-export default PostsRouter
+export default BusinessesRouter

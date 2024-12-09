@@ -44,13 +44,12 @@ export const COUNTRY_ROUTES = {
 }
 
 export const LOGS_ROUTES = {
-    INSERT_LOG: 'insert-log'
+    INSERT_LOG: '/insert-log'
 }
 
 export const USER_ROUTES = {
-    AUTH_USER: 'auth-user'
+    AUTH_USER: '/auth-user'
 }
-
 
 export const LANGUAGES = {
     ALBANIAN: 'sq_AL'
@@ -77,8 +76,8 @@ export const CONTEXT_KEYS = {
 }
 
 export const CATEGORIES_ROUTES = {
-    CREATE_CATEGORY: 'create-category',
-    LIST_CATEGORIES: 'list-categories'
+    CREATE_CATEGORY: '/create-category',
+    LIST_CATEGORIES: '/list-categories'
 }
 
 export const HEADER_KEYS = {
