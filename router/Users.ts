@@ -14,9 +14,25 @@ import {
 const UsersRouter = (): HonoBase => {
     const router = new Hono()
 
-    router.post(USERS_ROUTES.AUTH_USER, Connect, AuthUser)
-    router.post(USERS_ROUTES.UPDATE_AVATAR, Connect, AuthMiddleware, UpdateAvatar)
-    router.post(USERS_ROUTES.UPDATE_USER, Connect, AuthMiddleware, UpdateUser)
+    router.post(
+        USERS_ROUTES.AUTH_USER, 
+        Connect, 
+        AuthUser
+    )
+
+    router.post(
+        USERS_ROUTES.UPDATE_AVATAR, 
+        Connect, 
+        AuthMiddleware, 
+        UpdateAvatar
+    )
+
+    router.post(
+        USERS_ROUTES.UPDATE_USER, 
+        Connect, 
+        AuthMiddleware, 
+        UpdateUser
+    )
 
     return router
 }
