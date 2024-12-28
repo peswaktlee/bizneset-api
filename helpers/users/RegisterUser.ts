@@ -1,4 +1,5 @@
 import type { Context } from 'hono'
+import type { UserInterface } from '@/ts'
 
 import { UserModel } from '@/data/models'
 import { HttpResponder } from '@/helpers/http'
@@ -10,16 +11,25 @@ const RegisterUser = async (
     c: Context, 
     uid: string,
     name: string,
+    surname: string,
     email: string,
+    phone: string,
     avatar: string
 ) => {
     try {
-        const initial_user = new UserModel({
+        const user_inital_data: Partial<UserInterface> = {
             Uid: uid,
-            Name: name || '',
-            Email: email,
-            Avatar: avatar,
-            LastVisited: CurrentTimestamp(),
+            Email: email
+        }
+
+        if (name) user_inital_data.Name = name
+        if (surname) user_inital_data.Surname = surname
+        if (phone) user_inital_data.Phone = phone
+        if (avatar) user_inital_data.Avatar = avatar
+
+        const initial_user = new UserModel({
+            ...user_inital_data,
+            Last_Active_At: CurrentTimestamp(),
             Created_At: CurrentTimestamp(),
             Updated_At: CurrentTimestamp()
         })

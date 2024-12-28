@@ -18,7 +18,7 @@ const AuthMiddleware = async (c: Context, next: Next) => {
             data: null,
             code: 500
         })
-    
+
         else {
             const token = authorization.replace('Bearer ', '')
             const decodedToken = await admin.auth().verifyIdToken(token)

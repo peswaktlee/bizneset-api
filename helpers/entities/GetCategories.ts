@@ -9,24 +9,24 @@ const GetCategories = async (): Promise<Array<CategoryInterface>> => {
         if (STATES.CATEGORIES) return STATES.CATEGORIES
         
         else {
-            const countries = await CategoryModel.find()
+            const categories = await CategoryModel.find()
                 .select(CategoryListSelector)
-                .sort({ Name: 1 })
+                .sort({ Position: 1 })
                 .lean()
 
-            STATES.CATEGORIES = countries
+            STATES.CATEGORIES = categories
 
-            return countries
+            return categories
         }
     } 
     
     else {
-        const countries = await CategoryModel.find()
+        const categories = await CategoryModel.find()
             .select(CategoryListSelector)
-            .sort({ Name: 1 })
+            .sort({ Position: 1 })
             .lean()
 
-        return countries
+        return categories
     }
 }
 

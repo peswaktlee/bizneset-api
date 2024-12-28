@@ -6,15 +6,11 @@ import { UserModel } from '@/data/models'
 import { HttpResponder } from '@/helpers/http'
 import { CurrentTimestamp } from '@/helpers/dates'
 
-const LoginUser = async (
-    c: Context, 
-    user: UserInterface, 
-    uid: string
-) => {
+const LoginUser = async (c: Context, user: UserInterface) => {
     setTimeout(async () => {
-        await UserModel.updateOne({ Uid: uid }, {
+        await UserModel.updateOne({ Uid: user?.Uid }, {
             $set: {
-                LastVisited: CurrentTimestamp()
+                Last_Active_At: CurrentTimestamp()
             },
             $inc:{
                 Visits: 1

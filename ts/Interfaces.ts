@@ -3,24 +3,6 @@ import type {
     UserRoleTypes 
 } from '@/ts'
 
-export interface UserInterface {
-    _id: string
-    Name: string
-    Email: string
-    Avatar: string
-    StripeCustomerId: string
-    Uid: string
-    ProjectCount: number
-    PageCount: number
-    Impersonationing: null | string
-    ComponentCount: number
-    Role: UserRoleTypes
-    Visits: number
-    LastVisited: Date
-    Created_At: Date
-    Updated_At: Date | null
-}
-
 export interface AuthStateInterface {
     User: UserInterface | null | false
     Loading: boolean
@@ -58,20 +40,18 @@ export interface CountryInterface {
 
 export interface UserInterface {
     _id: string
-    Name: string
-    Surname: string
-    Avatar: string
-    Phone: number
-    Country: CountryInterface
-    City: CityInterface
-    ProfileCompleted: boolean
-    Admin: boolean
-    CompletedRegistration: boolean
+    Uid: string
+    Name: string | null
+    Surname: string | null
+    Email: string
+    Avatar: string | null
+    Phone: string | null
+    Role: UserRoleTypes
     Visits: number
-    Posts: number
-    NotificationsOutsideCity: boolean
-    NotificationsSameCity: boolean
-    Last_Active: Date
+    Businesses: number
+    Country: CountryInterface | null
+    City: CityInterface | null
+    Last_Active_At: Date
     Created_At: Date
     Updated_At: Date | null
 }
@@ -101,6 +81,7 @@ export interface CategoryInterface {
     Name: string
     Slug: string
     Businesses: number
+    Position: number
     Created_At: Date
     Updated_At: Date | null
 }

@@ -13,11 +13,10 @@ export const CountryListSelector = {
 }
 
 export const CategoryListSelector = {
+    _id: 0,
     Name: 1,
-    Posts: 1,
-    Users: 1,
-    Cities: 1,
-    Code: 1
+    Slug: 1,
+    Businesses: 1
 }
 
 export const AUTH_USER_SELECTOR = {
