@@ -1,10 +1,15 @@
 import type { UserInterface } from '@/ts'
 
 import { Schema } from 'mongoose'
-import { MODELS } from '@/data/constants'
+import { MODELS, USER_ROLES } from '@/data/constants'
 
 const UserStructure: Schema<UserInterface> = new Schema(
     {
+        Uid: {
+            type: String,
+            required: true,
+            unique: true
+        },
         Name: {
             type: String,
             required: false,
@@ -19,8 +24,9 @@ const UserStructure: Schema<UserInterface> = new Schema(
         },
         Phone: {
             type: Number,
-            required: true,
-            unique: true
+            required: false,
+            unique: true,
+            default: null
         },
         Avatar: {
             type: String,
@@ -28,23 +34,11 @@ const UserStructure: Schema<UserInterface> = new Schema(
             unique: false,
             default: null
         },
-        ProfileCompleted: {
-            type: Boolean,
+        Role: {
+            type: String,
             required: false,
             unique: false,
-            default: false
-        },
-        CompletedRegistration: {
-            type: Boolean,
-            required: false,
-            unique: false,
-            default: false
-        },
-        Admin: {
-            type: Boolean,
-            required: false,
-            unique: false,
-            default: false
+            default: USER_ROLES.USER
         },
         Visits: {
             type: Number,
@@ -52,7 +46,7 @@ const UserStructure: Schema<UserInterface> = new Schema(
             unique: false,
             default: 0
         },
-        Posts: {
+        Businesses: {
             type: Number,
             required: false,
             unique: false,
@@ -72,19 +66,7 @@ const UserStructure: Schema<UserInterface> = new Schema(
             ref: MODELS.CITY,
             default: null
         },
-        NotificationsSameCity: {
-            type: Boolean,
-            required: false,
-            unique: false,
-            default: true
-        },
-        NotificationsOutsideCity: {
-            type: Boolean,
-            required: false,
-            unique: false,
-            default: false
-        },
-        Last_Active: {
+        Last_Active_At: {
             type: Date,
             required: true,
             unique: false

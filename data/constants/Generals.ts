@@ -60,7 +60,7 @@ export const API_VERSIONS = {
 }
 
 export const ENVIRONMENTS = {
-    LOCAL: 'local',
+    DEV: 'dev',
     PROD: 'prod'
 }
 
