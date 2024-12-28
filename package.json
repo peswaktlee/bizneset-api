@@ -1,8 +1,7 @@
 {
   "name": "bizneset-api",
-  "version": "0.0.11",
+  "version": "0.0.13",
   "scripts": {
-    "api:local": "npm run www:check && env-cmd -f .env.local next dev --port 5500",
     "api:dev": "npm run www:check && env-cmd -f .env.dev next dev --port 5500",
     "api:prod": "npm run www:check && env-cmd -f .env.prod next dev --port 5500",
     "www:build": "npm run www:check && next build",

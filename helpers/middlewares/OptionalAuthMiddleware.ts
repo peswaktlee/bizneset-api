@@ -16,14 +16,14 @@ const OptionalAuthMiddleware = async (c: Context, next: Next) => {
 
             if (decodedToken?.uid) {
                 const user = await UserModel
-                    .findOne({ Uid: decodedToken.uid })
+                    .findOne({ Uid: decodedToken?.uid })
                     .lean()
 
-                if (user) {
-                    c.set(CONTEXT_KEYS.USER, user)
-                    await next()
-                }
+                if (user) c.set(CONTEXT_KEYS.USER, user)
+                else c.set(CONTEXT_KEYS.USER, decodedToken?.uid)
             }
+
+            else c.set(CONTEXT_KEYS.USER, null)
         }
     }
 

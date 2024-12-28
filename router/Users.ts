@@ -1,7 +1,7 @@
 import type { HonoBase } from 'hono/hono-base'
 
 import { Hono } from 'hono'
-import { AuthMiddleware } from '@/helpers/middlewares'
+import { AuthMiddleware, OptionalAuthMiddleware } from '@/helpers/middlewares'
 import { Connect } from '@/helpers/libs/mongo'
 import { USERS_ROUTES } from '@/data/constants'
 
@@ -17,6 +17,7 @@ const UsersRouter = (): HonoBase => {
     router.post(
         USERS_ROUTES.AUTH_USER, 
         Connect, 
+        OptionalAuthMiddleware,
         AuthUser
     )
 

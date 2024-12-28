@@ -19,6 +19,12 @@ const CategoryStructure: Schema<CategoryInterface> = new Schema(
             unique: false,
             default: 0
         },
+        Position: {
+            type: Number,
+            required: false,
+            unique: false,
+            default: 0
+        },
         Created_At: {
             type: Date,
             required: true,

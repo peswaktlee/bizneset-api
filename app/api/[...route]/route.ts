@@ -2,6 +2,7 @@ import { Env, Hono } from 'hono'
 import { handle } from 'hono/vercel'
 import { GlobalMiddlewares } from '@/helpers/api'
 import { CatchAll } from '@/helpers/router'
+import { Connect } from '@/helpers/libs/mongo'
 import { GROUP_ROUTES } from '@/data/constants'
 
 import { 
@@ -12,7 +13,6 @@ import {
     Logs, 
     Users 
 } from '@/router'
-import { Connect } from '@/helpers/libs/mongo'
 
 const app = new Hono()
 

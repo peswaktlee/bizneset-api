@@ -6,7 +6,7 @@ import { Next } from 'hono'
 import { etag } from 'hono/etag'
 import { logger } from 'hono/logger'
 import { HttpResponder } from '@/helpers/http'
-import { ApiVersion, ApiLanguage, ApiCors } from '@/helpers/middlewares'
+import { ApiVersion, ApiLanguage } from '@/helpers/middlewares'
 
 const ApiOptions = async (c: Context, next: Next) => {
     const OPTIONS: RequestOptions = {
@@ -49,7 +49,6 @@ const GlobalMiddlewares = async (route: string, api: HonoBase) => {
     api.use(`${route}/*`, etag())
     api.use(`${route}/*`, logger())
 
-    api.use(`${route}/*`, ApiCors)
     api.use(`${route}/*`, ApiOptions)
 }
 
