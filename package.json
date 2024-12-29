@@ -1,6 +1,6 @@
 {
   "name": "bizneset-api",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "scripts": {
     "api:dev": "npm run www:check && env-cmd -f .env.dev next dev --port 5500",
     "api:prod": "npm run www:check && env-cmd -f .env.prod next dev --port 5500",
@@ -23,7 +23,8 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "zod": "^3.23.8",
-    "sharp": "^0.33.5"
+    "sharp": "^0.33.5",
+    "resend": "^4.0.0"
   },
   "devDependencies": {
     "@types/node": "18.11.18",

@@ -2,7 +2,7 @@ import type { Context } from 'hono'
 import { DECRYPT_KEY } from '@/data/constants'
 
 const DecodeBody = async (c: Context) => {
-    const encoded = await c.req.json()
+    const encoded = await c?.req?.json()
 
     if (typeof encoded === 'string') {
         const key = DECRYPT_KEY

@@ -23,15 +23,15 @@ const AuthUser = async (c: Context) => {
 
             const [firstName, lastName] = name.split(' ')
 
-            return await RegisterUser(
+            return await RegisterUser({
                 c, 
                 uid,
-                firstName,
-                lastName,
+                name: firstName,
+                surname: lastName,
                 email,
                 phone,
                 avatar
-            )
+            })
         }
 
         else return await HttpResponder({

@@ -19,6 +19,11 @@ export const CLOUDFLARE_TOKEN_VALUE: string = process.env.CLOUDFLARE_TOKEN_VALUE
 export const CLOUDFLARE_ACCESS_KEY_ID: string = process.env.CLOUDFLARE_ACCESS_KEY_ID as string
 export const CLOUDFLARE_SECRET_ACCESS_KEY: string = process.env.CLOUDFLARE_SECRET_ACCESS_KEY as string
 export const CLOUDFLARE_S3_EU_ENDPOINT: string = process.env.CLOUDFLARE_S3_EU_ENDPOINT as string
+export const CLOUDFLARE_S3_US_ENDPOINT: string = process.env.CLOUDFLARE_S3_US_ENDPOINT as string
+
+// Resend
+export const RESEND_API_SECRET_KEY: string = process.env.RESEND_API_SECRET_KEY as string
+export const RESEND_GENERAL_AUDIENCE_ID: string = process.env.RESEND_GENERAL_AUDIENCE_ID as string
 
 // Firebase Admin
 export const FB_ADMIN_TYPE: string = process.env.FB_ADMIN_TYPE as string
