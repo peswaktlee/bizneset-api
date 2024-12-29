@@ -30,7 +30,7 @@ const UserStructure: Schema<UserInterface> = new Schema(
         Phone: {
             type: Number,
             required: false,
-            unique: true,
+            unique: false,
             default: null
         },
         Avatar: {
