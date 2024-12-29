@@ -22,6 +22,11 @@ const UserStructure: Schema<UserInterface> = new Schema(
             unique: false,
             default: null
         },
+        Email: {
+            type: String,
+            required: true,
+            unique: true
+        },
         Phone: {
             type: Number,
             required: false,

@@ -1,5 +1,5 @@
 import type { CSSProperties, ReactNode, MouseEvent } from 'react'
-import type { CategoryInterface, CityInterface, CountryInterface } from '@/ts'
+import type { CategoryInterface, CityInterface, CountryInterface, UserInterface } from '@/ts'
 import type { Context } from 'hono'
 import type { StatusCode } from 'hono/utils/http-status'
 import type { METHODS } from 'http'
@@ -138,4 +138,23 @@ export type UploadToBucketFunctionProps = {
     file: Buffer
     type: string
     publicObject: boolean
+}
+
+export type SendEmailFunctionProps = {
+    subject: string,
+    from?: string,
+    template: ReactNode
+} & (
+    | { toEmail: string; toEmails?: never }
+    | { toEmail?: never; toEmails: Array<string> }
+)
+
+export type RegisterUserFunctionProps = {
+    c: Context, 
+    uid: string,
+    name: string,
+    surname: string,
+    email: string,
+    phone: string,
+    avatar: string
 }
