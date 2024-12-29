@@ -1,21 +1,23 @@
-import type { Context } from 'hono'
-import type { UserInterface } from '@/ts'
+import type { RegisterUserFunctionProps, UserInterface } from '@/ts'
 
 import { UserModel } from '@/data/models'
 import { HttpResponder } from '@/helpers/http'
 import { CurrentTimestamp } from '@/helpers/dates'
 import { DeleteFirebaseAccount } from '@/helpers/libs/firebase'
 import { Console } from '@/helpers/logs'
+import { AddContact } from '@/helpers/libs/resend'
 
-const RegisterUser = async (
-    c: Context, 
-    uid: string,
-    name: string,
-    surname: string,
-    email: string,
-    phone: string,
-    avatar: string
-) => {
+const RegisterUser = async (props: RegisterUserFunctionProps) => {
+    const {
+        c, 
+        uid,
+        name,
+        surname,
+        email,
+        phone,
+        avatar
+    } = props
+
     try {
         const user_inital_data: Partial<UserInterface> = {
             Uid: uid,
@@ -35,6 +37,7 @@ const RegisterUser = async (
         })
 
         await initial_user.save()
+        await AddContact(initial_user)
 
         return await HttpResponder({
             c,
