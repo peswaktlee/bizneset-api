@@ -1,13 +1,15 @@
-import CreateBusiness from '@/actions/businesses/CreateBusiness'
+import SubmitBusiness from '@/actions/businesses/SubmitBusiness'
 import DeleteBusiness from '@/actions/businesses/DeleteBusiness'
-import ListBusiness from '@/actions/businesses/ListBusiness'
+import ViewBusiness from '@/actions/businesses/ViewBusiness'
+import ListSimilarBusinesses from '@/actions/businesses/ListSimilarBusinesses'
 import ListBusinesses from '@/actions/businesses/ListBusinesses'
 import ListUserBusinesses from '@/actions/businesses/ListUserBusinesses'
 
 export {
-    CreateBusiness,
+    SubmitBusiness,
     DeleteBusiness,
-    ListBusiness,
+    ViewBusiness,
+    ListSimilarBusinesses,
     ListBusinesses,
     ListUserBusinesses
 }

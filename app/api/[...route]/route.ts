@@ -6,12 +6,12 @@ import { Connect } from '@/helpers/libs/mongo'
 import { GROUP_ROUTES } from '@/data/constants'
 
 import { 
-    Businesses, 
-    Categories, 
-    Cities, 
-    Countries, 
-    Logs, 
-    Users 
+    BusinessesRouter, 
+    CategoriesRouter, 
+    CitiesRouter, 
+    CountriesRouter, 
+    LogsRouter, 
+    UsersRouter 
 } from '@/router'
 
 const app = new Hono()
@@ -21,12 +21,12 @@ const ApplyGlobalMiddlewares = (route: string, handler: Hono<Env, {}, '/'>) => {
     app.route(route, handler)
 }
 
-ApplyGlobalMiddlewares(GROUP_ROUTES.BUSINESS, Businesses())
-ApplyGlobalMiddlewares(GROUP_ROUTES.CATEGORIES, Categories())
-ApplyGlobalMiddlewares(GROUP_ROUTES.COUNTRIES, Countries())
-ApplyGlobalMiddlewares(GROUP_ROUTES.CITIES, Cities())
-ApplyGlobalMiddlewares(GROUP_ROUTES.LOGS, Logs())
-ApplyGlobalMiddlewares(GROUP_ROUTES.USERS, Users())
+ApplyGlobalMiddlewares(GROUP_ROUTES.BUSINESSES, BusinessesRouter())
+ApplyGlobalMiddlewares(GROUP_ROUTES.CATEGORIES, CategoriesRouter())
+ApplyGlobalMiddlewares(GROUP_ROUTES.COUNTRIES, CountriesRouter())
+ApplyGlobalMiddlewares(GROUP_ROUTES.CITIES, CitiesRouter())
+ApplyGlobalMiddlewares(GROUP_ROUTES.USERS, UsersRouter())
+ApplyGlobalMiddlewares(GROUP_ROUTES.LOGS, LogsRouter())
 
 app.notFound(CatchAll)
 
