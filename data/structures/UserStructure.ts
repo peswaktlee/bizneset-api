@@ -57,6 +57,12 @@ const UserStructure: Schema<UserInterface> = new Schema(
             unique: false,
             default: 0
         },
+        Saves: {
+            type: Number,
+            required: false,
+            unique: false,
+            default: 0
+        },
         Country: {
             type: Schema.Types.ObjectId,
             required: false,

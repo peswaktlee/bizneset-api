@@ -1,6 +1,6 @@
 export * from '@/data/constants/Codes'
 export * from '@/data/constants/Envs'
-export * from '@/data/constants/Generals'
+export * from '@/data/constants/Constants'
 export * from '@/data/constants/Lists'
 export * from '@/data/constants/States'
 export * from '@/data/constants/Selectors'

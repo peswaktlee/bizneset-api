@@ -1,26 +1,27 @@
 import type { HonoBase } from 'hono/hono-base'
 
 import { Hono } from 'hono'
-import { AuthMiddleware } from '@/helpers/middlewares'
+import { AuthMiddleware, OptionalAuthMiddleware } from '@/helpers/middlewares'
 import { Connect } from '@/helpers/libs/mongo'
 import { BUSINESSES_ROUTES } from '@/data/constants'
 
 import {
-    CreateBusiness,
+    SubmitBusiness,
     DeleteBusiness,
     ListBusinesses,
-    ListBusiness,
-    ListUserBusinesses
+    ViewBusiness,
+    ListUserBusinesses,
+    ListSimilarBusinesses
 } from '@/actions/businesses'
 
 const BusinessesRouter = (): HonoBase => {
     const router = new Hono()
 
     router.post(
-        BUSINESSES_ROUTES.CREATE_BUSINESS, 
+        BUSINESSES_ROUTES.SUBMIT_BUSINESS, 
         Connect, 
         AuthMiddleware, 
-        CreateBusiness
+        SubmitBusiness
     )
 
     router.post(
@@ -33,15 +34,15 @@ const BusinessesRouter = (): HonoBase => {
     router.post(
         BUSINESSES_ROUTES.LIST_BUSINESSES, 
         Connect, 
-        AuthMiddleware, 
+        OptionalAuthMiddleware, 
         ListBusinesses
     )
 
     router.post(
-        BUSINESSES_ROUTES.LIST_BUSINESSES, 
+        BUSINESSES_ROUTES.VIEW_BUSINESS, 
         Connect, 
-        AuthMiddleware, 
-        ListBusiness
+        OptionalAuthMiddleware, 
+        ViewBusiness
     )
 
     router.post(
@@ -49,6 +50,13 @@ const BusinessesRouter = (): HonoBase => {
         Connect, 
         AuthMiddleware, 
         ListUserBusinesses
+    )
+
+    router.post(
+        BUSINESSES_ROUTES.LIST_SIMILAR_BUSINESSES, 
+        Connect, 
+        OptionalAuthMiddleware, 
+        ListSimilarBusinesses
     )
 
     return router

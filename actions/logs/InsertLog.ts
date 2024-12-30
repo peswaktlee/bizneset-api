@@ -1,21 +1,18 @@
 import type { Context } from 'hono'
 import type { LogInterface } from '@/ts'
 
-import { LogModel, UserModel } from '@/data/models'
+import { LogModel } from '@/data/models'
 import { DecodeBody, HttpResponder } from '@/helpers/http'
 import { Console } from '@/helpers/logs'
 import { CurrentTimestamp } from '@/helpers/dates'
+import { ObjectId } from '@/helpers/libs/mongo'
+import { CONTEXT_KEYS } from '@/data/constants'
 
 const InsertLog = async (c: Context) => {
     try {
-        const uid = c.get('uid')
+        const user = c.get(CONTEXT_KEYS.USER)
 
         const { message, func, path, type } = await DecodeBody(c)
-
-        const user = await UserModel
-            .findOne({ Uid: uid })
-            .select({ _id: 1, Email: 1 })
-            .lean()
 
         const date = CurrentTimestamp()
 
@@ -30,7 +27,12 @@ const InsertLog = async (c: Context) => {
             Occurred_At: date
         }
 
-        if (user) logInstance.User = user
+        if (user) {
+            const userObjectedId = ObjectId(user._id)
+            
+            // @ts-ignore
+            if (userObjectedId) logInstance.User = userObjectedId
+        }
 
         const log = new LogModel(logInstance)
 

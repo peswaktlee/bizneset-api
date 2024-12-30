@@ -8,6 +8,7 @@ import { sq_AL } from '@/data/langs'
 
 import { 
     API_VERSIONS, 
+    BUSINESS_STATUSES, 
     LANGUAGES, 
     LOG_TYPES, 
     USER_ROLES 
@@ -21,6 +22,7 @@ export type HttpMethodTypes = (typeof METHODS)[keyof typeof METHODS]
 export type LogTypes = (typeof LOG_TYPES)[keyof typeof LOG_TYPES]
 export type LanguagesTypes = (typeof LANGUAGES)[keyof typeof LANGUAGES]
 export type ApiVersionsTypes = (typeof API_VERSIONS)[keyof typeof API_VERSIONS]
+export type BusinessStatusTypes = (typeof BUSINESS_STATUSES)[keyof typeof BUSINESS_STATUSES]
 
 export type RouterPathFunctionType = (path: string) => void
 
