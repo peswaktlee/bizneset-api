@@ -28,3 +28,19 @@ export const AUTH_USER_SELECTOR = {
     Visits: 0,
     LastVisited: 0
 }
+
+export const LIST_BUSINESSES_SELECTOR = {
+    _id: 0
+}
+
+export const LIST_SIMILAR_BUSINESSES_SELECTOR = {
+    _id: 0
+}
+
+export const LIST_USER_BUSINESSES_SELECTOR = {
+    _id: 0
+}
+
+export const VIEW_BUSINESS_SELECTOR = {
+    _id: 0
+}

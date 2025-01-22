@@ -1,7 +1,9 @@
 import type { 
+    BusinessStatusTypes,
     LogTypes, 
     UserRoleTypes 
 } from '@/ts'
+import { H } from 'hono/types'
 
 export interface AuthStateInterface {
     User: UserInterface | null | false
@@ -49,11 +51,19 @@ export interface UserInterface {
     Role: UserRoleTypes
     Visits: number
     Businesses: number
+    Saves: number
     Country: CountryInterface | null
     City: CityInterface | null
     Last_Active_At: Date
     Created_At: Date
     Updated_At: Date | null
+}
+
+export interface SaveInterface {
+    _id: string
+    User: UserInterface
+    Business: BusinessInterface
+    Saved_At: Date
 }
 
 export interface CityInterface {
@@ -86,12 +96,44 @@ export interface CategoryInterface {
     Updated_At: Date | null
 }
 
+
+export interface HoursInterface {
+    Monday: string | false
+    Tuesday: string | false
+    Wednesday: string | false
+    Thursday: string | false
+    Friday: string | false
+    Saturday: string | false
+    Sunday: string | false
+}
+
+export interface BusinessLocationInterface {
+    Name: string
+    Address: string
+    Phone: string
+    Email: string
+    Website: string
+    Hours: HoursInterface
+}
+
+export interface BusinessLinkInterface {
+    Name: string
+    URL: string
+}
+
 export interface BusinessInterface {
     _id: string
-    Name: string
+    Title: string
     Slug: string
-    Website: string
-    Links: Array<string>
-    Locations: Array<string>
+    Logo: string
+    Description: string
     User: UserInterface
+    Status: BusinessStatusTypes
+    Links: Array<BusinessLinkInterface>
+    Locations: Array<BusinessLocationInterface>
+    Visits: number
+    Reach: number
+    Saves: number
+    Created_At: Date
+    Updated_At: Date | null
 }

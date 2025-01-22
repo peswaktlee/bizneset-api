@@ -1,15 +1,17 @@
-import Businesses from '@/router/Businesses'
-import Categories from '@/router/Categories'
-import Cities from '@/router/Cities'
-import Countries from '@/router/Countries'
-import Logs from '@/router/Logs'
-import Users from '@/router/Users'
+import BusinessesRouter from '@/router/BusinessesRouter'
+import CategoriesRouter from '@/router/CategoriesRouter'
+import CitiesRouter from '@/router/CitiesRouter'
+import CountriesRouter from '@/router/CountriesRouter'
+import LogsRouter from '@/router/LogsRouter'
+import SavesRouter from '@/router/SavesRouter'
+import UsersRouter from '@/router/UsersRouter'
 
 export {
-    Businesses,
-    Categories,
-    Cities,
-    Countries,
-    Logs,
-    Users
+    BusinessesRouter,
+    CategoriesRouter,
+    CitiesRouter,
+    CountriesRouter,
+    LogsRouter,
+    SavesRouter,
+    UsersRouter
 }
