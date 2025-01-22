@@ -59,7 +59,7 @@ export interface UserInterface {
     Updated_At: Date | null
 }
 
-export interface UserSaveInterface {
+export interface SaveInterface {
     _id: string
     User: UserInterface
     Business: BusinessInterface
@@ -107,13 +107,18 @@ export interface HoursInterface {
     Sunday: string | false
 }
 
-export type LocationInterface = {
+export interface BusinessLocationInterface {
     Name: string
     Address: string
     Phone: string
     Email: string
     Website: string
     Hours: HoursInterface
+}
+
+export interface BusinessLinkInterface {
+    Name: string
+    URL: string
 }
 
 export interface BusinessInterface {
@@ -124,8 +129,8 @@ export interface BusinessInterface {
     Description: string
     User: UserInterface
     Status: BusinessStatusTypes
-    Links: Array<string>
-    Locations: Array<object>
+    Links: Array<BusinessLinkInterface>
+    Locations: Array<BusinessLocationInterface>
     Visits: number
     Reach: number
     Saves: number

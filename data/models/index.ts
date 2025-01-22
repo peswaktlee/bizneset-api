@@ -4,7 +4,7 @@ import CityModel from '@/data/models/CityModel'
 import CountryModel from '@/data/models/CountryModel'
 import LogModel from '@/data/models/LogModel'
 import UserModel from '@/data/models/UserModel'
-import UserSaveModel from '@/data/models/UserSaveModel'
+import SaveModel from '@/data/models/SaveModel'
 
 export {
     BusinessModel,
@@ -13,5 +13,5 @@ export {
     CountryModel,
     LogModel,
     UserModel,
-    UserSaveModel
+    SaveModel
 }

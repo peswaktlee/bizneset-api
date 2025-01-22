@@ -1,5 +1,5 @@
-import type { CSSProperties, ReactNode, MouseEvent } from 'react'
-import type { CategoryInterface, CityInterface, CountryInterface, UserInterface } from '@/ts'
+import type { CSSProperties, ReactNode, MouseEvent, FC } from 'react'
+import type { CategoryInterface, CityInterface, CountryInterface } from '@/ts'
 import type { Context } from 'hono'
 import type { StatusCode } from 'hono/utils/http-status'
 import type { METHODS } from 'http'

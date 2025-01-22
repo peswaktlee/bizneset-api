@@ -1,6 +1,6 @@
 {
   "name": "bizneset-api",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "scripts": {
     "api:dev": "npm run www:check && env-cmd -f .env.dev next dev --port 5500",
     "api:prod": "npm run www:check && env-cmd -f .env.prod next dev --port 5500",

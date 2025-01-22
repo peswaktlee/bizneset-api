@@ -3,7 +3,7 @@ import CategoriesRouter from '@/router/CategoriesRouter'
 import CitiesRouter from '@/router/CitiesRouter'
 import CountriesRouter from '@/router/CountriesRouter'
 import LogsRouter from '@/router/LogsRouter'
-import UserSavesRouter from '@/router/UserSavesRouter'
+import SavesRouter from '@/router/SavesRouter'
 import UsersRouter from '@/router/UsersRouter'
 
 export {
@@ -12,6 +12,6 @@ export {
     CitiesRouter,
     CountriesRouter,
     LogsRouter,
-    UserSavesRouter,
+    SavesRouter,
     UsersRouter
 }
