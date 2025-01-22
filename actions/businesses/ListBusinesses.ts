@@ -13,7 +13,7 @@ const ListBusinesses = async (c: Context) => {
         const count = await BusinessModel.countDocuments({})
         const businesses = await BusinessModel
             .find({})
-            .sort({ Locked: 1, Updated_At: -1 })
+            .sort({ Updated_At: -1 })
             .select(LIST_BUSINESSES_SELECTOR)
             .skip(offset)
             .limit(FETCH_LIMIT)

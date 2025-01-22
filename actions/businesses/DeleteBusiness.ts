@@ -11,9 +11,9 @@ const DeleteBusiness = async (c: Context) => {
     try {
         const user = c.get(CONTEXT_KEYS.USER)
 
-        const { businessId } = await DecodeBody(c)
-
         if (user) {
+            const { businessId } = await DecodeBody(c)
+
             const filter = { 
                 _id: ObjectId(businessId),
                 User: ObjectId(user?._id)

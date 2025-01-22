@@ -28,23 +28,8 @@ export const GROUP_ROUTES = {
     CITIES: 'cities',
     COUNTRIES: 'countries',
     LOGS: 'logs',
-    USERS: 'users'
-}
-
-export const BUSINESS_ROUTES = {
-
-}
-
-export const CATEGORY_ROUTES = {
-
-}
-
-export const CITY_ROUTES = {
-
-}
-
-export const COUNTRY_ROUTES = {
-
+    USERS: 'users',
+    SAVES: 'saves'
 }
 
 export const LOGS_ROUTES = {
@@ -105,6 +90,11 @@ export const CITIES_ROUTES = {
 export const COUNTRIES_ROUTES = {
     CREATE_COUNTRY: '/create',
     LIST_COUNTRIES: '/list'
+}
+
+export const SAVES_ROUTES = {
+    LIST_SAVES: '/list',
+    HANDLE_SAVE: '/handle'
 }
 
 export const BUSINESSES_ROUTES = {

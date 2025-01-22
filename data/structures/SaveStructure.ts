@@ -1,9 +1,9 @@
-import type { UserSaveInterface } from '@/ts'
+import type { SaveInterface } from '@/ts'
 
 import { Schema } from 'mongoose'
 import { MODELS } from '@/data/constants'
 
-const UserSaveStructure: Schema<UserSaveInterface> = new Schema(
+const SaveStructure: Schema<SaveInterface> = new Schema(
     {
         User: {
             type: Schema.Types.ObjectId,
@@ -29,4 +29,4 @@ const UserSaveStructure: Schema<UserSaveInterface> = new Schema(
     }
 )
 
-export default UserSaveStructure
+export default SaveStructure
