@@ -9,7 +9,10 @@ const AuthUser = async (c: Context) => {
     try {
         const user = c.get(CONTEXT_KEYS.USER)
 
-        if (typeof user === 'object') return await LoginUser(c, user)
+        if (typeof user === 'object') {
+            const { avatar } = await DecodeBody(c)
+            return await LoginUser(c, user, avatar)
+        }
 
         else if (typeof user === 'string') {
             const uid = user

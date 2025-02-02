@@ -1,6 +1,6 @@
 {
   "name": "bizneset-api",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "scripts": {
     "api:dev": "npm run www:check && env-cmd -f .env.dev next dev --port 5500",
     "api:prod": "npm run www:check && env-cmd -f .env.prod next dev --port 5500",
@@ -14,17 +14,18 @@
     "www:check": "npm run www:lint && npm run www:tsc"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.616.0",
+    "firebase-admin": "^11.11.1",
     "hono": "^4.6.12",
     "moment-timezone": "^0.5.46",
-    "firebase-admin": "^11.11.1",
     "mongoose": "^8.3.4",
     "next": "14.2.5",
-    "@aws-sdk/client-s3": "^3.616.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "zod": "^3.23.8",
+    "resend": "^4.0.0",
     "sharp": "^0.33.5",
-    "resend": "^4.0.0"
+    "shqip-ai": "latest",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/node": "18.11.18",

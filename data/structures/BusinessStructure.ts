@@ -27,10 +27,23 @@ const BusinessStructure: Schema<BusinessInterface> = new Schema(
             unique: false,
             default: BUSINESS_STATUSES.PENDING
         },
+        Logo: {
+            type: String,
+            required: false,
+            unique: false,
+            default: null
+        },
+        Gallery: {
+            type: [String],
+            required: false,
+            unique: false,
+            default: []
+        },
         Description: {
             type: String,
             required: true,
-            unique: false
+            unique: false,
+            default: ''
         },
         Locations: {
             type: [Object],
@@ -38,11 +51,35 @@ const BusinessStructure: Schema<BusinessInterface> = new Schema(
             unique: false,
             default: []
         },
+        LocationCount: {
+            type: Number,
+            required: false,
+            unique: false,
+            default: 0
+        },
         Links: {
             type: [String],
             required: false,
             unique: false,
             default: []
+        },
+        LinkCount: {
+            type: Number,
+            required: false,
+            unique: false,
+            default: 0
+        },
+        Website: {
+            type: String,
+            required: false,
+            unique: false,
+            default: null
+        },
+        Email: {
+            type: String,
+            required: false,
+            unique: false,
+            default: null
         },
         Visits: {
             type: Number,

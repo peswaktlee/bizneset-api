@@ -160,3 +160,9 @@ export type RegisterUserFunctionProps = {
     phone: string,
     avatar: string
 }
+
+export type UploadToBucketSizeType = {
+    status: boolean
+    path: string | null
+    size: number
+}
