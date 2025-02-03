@@ -10,7 +10,7 @@ const CountryStructure: Schema<CountryInterface> = new Schema(
             unique: true
         },
         Code: {
-            type: Number,
+            type: String,
             required: true,
             unique: true
         },
@@ -39,8 +39,9 @@ const CountryStructure: Schema<CountryInterface> = new Schema(
         },
         Updated_At: {
             type: Date,
-            required: true,
-            unique: false
+            required: false,
+            unique: false,
+            default: null
         }
     },
     {

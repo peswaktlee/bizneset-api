@@ -20,6 +20,8 @@ export const CLOUDFLARE_ACCESS_KEY_ID: string = process.env.CLOUDFLARE_ACCESS_KE
 export const CLOUDFLARE_SECRET_ACCESS_KEY: string = process.env.CLOUDFLARE_SECRET_ACCESS_KEY as string
 export const CLOUDFLARE_S3_EU_ENDPOINT: string = process.env.CLOUDFLARE_S3_EU_ENDPOINT as string
 export const CLOUDFLARE_S3_US_ENDPOINT: string = process.env.CLOUDFLARE_S3_US_ENDPOINT as string
+export const CLOUDFLARE_CDN_BUCKET: string = process.env.CLOUDFLARE_CDN_BUCKET as string
+export const CLOUDFLARE_BACKUP_BUCKET: string = process.env.CLOUDFLARE_BACKUP_BUCKET as string
 
 // Resend
 export const RESEND_API_SECRET_KEY: string = process.env.RESEND_API_SECRET_KEY as string

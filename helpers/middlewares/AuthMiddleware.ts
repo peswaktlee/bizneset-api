@@ -24,9 +24,7 @@ const AuthMiddleware = async (c: Context, next: Next) => {
             const decodedToken = await admin.auth().verifyIdToken(token)
 
             if (decodedToken?.uid) {
-                const user = await UserModel
-                    .findOne({ Uid: decodedToken.uid })
-                    .lean()
+                const user = await UserModel.findOne({ Uid: decodedToken.uid })
 
                 if (user) {
                     c.set(CONTEXT_KEYS.USER, user)

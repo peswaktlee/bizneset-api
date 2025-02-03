@@ -8,7 +8,13 @@ const CityStructure: Schema<CityInterface> = new Schema(
         Name: {
             type: String,
             required: true,
-            unique: true
+            unique: false
+        },
+        Country: {
+            type: Schema.Types.ObjectId,
+            required: true,
+            unique: false,
+            ref: MODELS.COUNTRY
         },
         Users: {
             type: Number,
@@ -16,11 +22,11 @@ const CityStructure: Schema<CityInterface> = new Schema(
             unique: false,
             default: 0
         },
-        Country: {
-            type: Schema.Types.ObjectId,
-            required: true,
+        Posts: {
+            type: Number,
+            required: false,
             unique: false,
-            ref: MODELS.COUNTRY
+            default: 0
         },
         Created_At: {
             type: Date,
@@ -29,8 +35,9 @@ const CityStructure: Schema<CityInterface> = new Schema(
         },
         Updated_At: {
             type: Date,
-            required: true,
-            unique: false
+            required: false,
+            unique: false,
+            default: null
         }
     },
     {

@@ -3,17 +3,35 @@ import type { Context } from 'hono'
 import { DecodeBody, HttpResponder } from '@/helpers/http'
 import { Console } from '@/helpers/logs'
 import { BusinessModel } from '@/data/models'
+import { ObjectId } from '@/helpers/libs/mongo'
 import { LIST_BUSINESSES_SELECTOR } from '@/data/constants/Selectors'
 import { FETCH_LIMIT } from '@/data/constants'
 
 const ListBusinesses = async (c: Context) => {
     try {
-        const { offset } = await DecodeBody(c)
+        const { 
+            offset,
+            term,
+            category,
+            city,
+            country
+        } = await DecodeBody(c)
+
+        const filters: Record<string, unknown> = {}
+
+        if (term) filters['Title'] = {
+            $regex: term, 
+            $options: 'i' 
+        }
+
+        if (category) filters['Category'] = ObjectId(category)
+        if (city) filters['City'] = ObjectId(city)
+        if (country) filters['Country'] = ObjectId(country)
             
         const count = await BusinessModel.countDocuments({})
         const businesses = await BusinessModel
             .find({})
-            .sort({ Updated_At: -1 })
+            .sort({ Created_At: -1 })
             .select(LIST_BUSINESSES_SELECTOR)
             .skip(offset)
             .limit(FETCH_LIMIT)

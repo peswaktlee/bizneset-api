@@ -6,6 +6,10 @@ export const USER_ROLES = {
     USER: 'user'
 }
 
+export const CDN_BUCKETS = {
+    AVATARS: 'avatars'
+}
+
 export const MODELS = {
     BUSINESS: 'Business',
     CATEGORY: 'Category',
@@ -13,7 +17,8 @@ export const MODELS = {
     COUNTRY: 'Country',
     LOG: 'Log',
     USER: 'User',
-    USER_SAVE: 'UserSave'
+    USER_SAVE: 'UserSave',
+    BACKUP: 'Backup'
 }
 
 export const LOG_TYPES = {
@@ -29,6 +34,7 @@ export const GROUP_ROUTES = {
     COUNTRIES: 'countries',
     LOGS: 'logs',
     USERS: 'users',
+    CRONS: 'crons',
     SAVES: 'saves'
 }
 
@@ -78,7 +84,7 @@ export const HEADER_KEYS = {
 
 export const USERS_ROUTES = {
     AUTH_USER: '/auth',
-    UPDATE_AVATAR: '/update',
+    UPDATE_AVATAR: '/avatar',
     UPDATE_USER: '/update'
 }
 
@@ -97,6 +103,10 @@ export const SAVES_ROUTES = {
     HANDLE_SAVE: '/handle'
 }
 
+export const CRONS_ROUTES = {
+    GENERATE_BACKUP: '/generate-backup'
+}
+
 export const BUSINESSES_ROUTES = {
     SUBMIT_BUSINESS: '/submit',
     DELETE_BUSINESS: '/delete',
@@ -107,7 +117,8 @@ export const BUSINESSES_ROUTES = {
 }
 
 export const FILE_EXTENSIONS = {
-    WEBP: 'webp'
+    WEBP: 'webp',
+    JSON: 'json'
 }
 
 export const FILE_TYPES = {

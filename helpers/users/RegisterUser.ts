@@ -6,6 +6,7 @@ import { CurrentTimestamp } from '@/helpers/dates'
 import { DeleteFirebaseAccount } from '@/helpers/libs/firebase'
 import { Console } from '@/helpers/logs'
 import { AddContact } from '@/helpers/libs/resend'
+import { AutoUpdateAvatar } from '@/actions/users'
 
 const RegisterUser = async (props: RegisterUserFunctionProps) => {
     const {
@@ -32,11 +33,14 @@ const RegisterUser = async (props: RegisterUserFunctionProps) => {
         const initial_user = new UserModel({
             ...user_inital_data,
             Last_Active_At: CurrentTimestamp(),
+            Last_Avatar_Update_At: CurrentTimestamp(),
             Created_At: CurrentTimestamp(),
             Updated_At: CurrentTimestamp()
         })
 
         await initial_user.save()
+
+        await AutoUpdateAvatar(avatar, uid)
         await AddContact(initial_user)
 
         return await HttpResponder({

@@ -1,3 +1,4 @@
+import BackupStructure from '@/data/structures/BackupStructure'
 import BusinessStructure from '@/data/structures/BusinessStructure'
 import CategoryStructure from '@/data/structures/CategoryStructure'
 import CityStructure from '@/data/structures/CityStructure'
@@ -7,6 +8,7 @@ import SaveStructure from '@/data/structures/SaveStructure'
 import UserStructure from '@/data/structures/UserStructure'
 
 export {
+    BackupStructure,
     BusinessStructure,
     CategoryStructure,
     CityStructure,

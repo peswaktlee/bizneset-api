@@ -1,7 +1,8 @@
 export const CityListSelector = {
     Name: 1,
     Posts: 1,
-    Users: 1
+    Users: 1,
+    Country: 1
 }
 
 export const CountryListSelector = {

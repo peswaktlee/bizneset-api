@@ -5,6 +5,7 @@ import { Console } from '@/helpers/logs'
 import { BusinessModel } from '@/data/models'
 import { CurrentTimestamp } from '@/helpers/dates'
 import { ObjectId } from '@/helpers/libs/mongo'
+import { GenerateBusinessSlug } from '@/helpers/generals'
 import { BUSINESS_STATUSES, CONTEXT_KEYS } from '@/data/constants'
 
 const SubmitBusiness = async (c: Context) => {
@@ -18,27 +19,34 @@ const SubmitBusiness = async (c: Context) => {
             })
 
             if (!hasOnPending) {
-                // const slug = await GenerateUniqueSlug()
-                const slug = Math.random()
-
                 const { 
-                    name, 
-                    image, 
-                    gallery 
+                    title, 
+                    description,
+                    logo,
+                    gallery,
+                    links,
+                    link,
+                    locations
                 } = await DecodeBody(c)
 
+                const slug = await GenerateBusinessSlug(title)
+
                 const business = new BusinessModel({ 
-                    Name: name,
+                    Title: title,
+                    Description: description,
                     Slug: slug,
                     Gallery: gallery,
-                    Image: image,
+                    Logo: logo,
                     User: ObjectId(user._id),
+                    Links: links,
+                    link: link,
+                    Locations: locations,
                     Created_At: CurrentTimestamp()
                 })
 
                 await business.save()
 
-                user.Businesses = user.ProjectCount + 1
+                user.Businesses = user.Businesses + 1
                 user.Updated_At = CurrentTimestamp()
 
                 await user.save()
@@ -48,10 +56,7 @@ const SubmitBusiness = async (c: Context) => {
                     success: true,
                     code: 200,
                     message: 'business-was-submited-successfully',
-                    data: {
-                        business: business,
-                        businessCount: user.ProjectCount + 1
-                    }
+                    data: business
                 })
             }
 

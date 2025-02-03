@@ -11,7 +11,7 @@ const ListSimilarBusinesses = async (c: Context) => {
         const { categoryId } = await DecodeBody(c)
             
         const businesses = await BusinessModel
-            .find({})
+            .find({ Cateogry: categoryId })
             .select(LIST_SIMILAR_BUSINESSES_SELECTOR)
             .limit(SIMILAR_BUSINESSES_FETCH_LIMIT)
             .lean()
@@ -29,10 +29,7 @@ const ListSimilarBusinesses = async (c: Context) => {
             success: false,
             code: 400,
             message: 'something-went-wrong-while-listing-similar-businesses',
-            data: {
-                businesses: [],
-                count: 0
-            }
+            data: []
         })
     }
 

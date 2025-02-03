@@ -77,6 +77,14 @@ const UserStructure: Schema<UserInterface> = new Schema(
             ref: MODELS.CITY,
             default: null
         },
+        Notifications: {
+            OnBusinessStatuses: {
+                type: Boolean,
+                required: false,
+                unique: false,
+                default: true
+            }
+        },
         Last_Active_At: {
             type: Date,
             required: true,
@@ -92,6 +100,11 @@ const UserStructure: Schema<UserInterface> = new Schema(
             required: false,
             unique: false,
             default: null
+        },
+        Last_Avatar_Update_At: {
+            type: Date,
+            required: true,
+            unique: false
         }
     },
     {
