@@ -1,4 +1,4 @@
-name: Daily Backup Generator
+name: Daily Backup Generator Development
 
 on:
   schedule:
@@ -10,15 +10,15 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      CRON_SECRET_PASS: ${{ secrets.CRON_SECRET_PASS }}
-      API_ENDPOINT: ${{ secrets.API_ENDPOINT }}
+      CRON_SECRET_PASS_DEV: ${{ secrets.CRON_SECRET_PASS_DEV }}
+      API_ENDPOINT_DEV: ${{ secrets.API_ENDPOINT_DEV }}
       API_LANGUAGE: ${{ secrets.API_LANGUAGE }}
       API_VERSION: ${{ secrets.API_VERSION }}
 
     steps:
       - name: Daily Backup Generator
         run: |
-          curl -H "Authorization: $CRON_SECRET_PASS" \
+          curl -H "Authorization: $CRON_SECRET_PASS_DEV" \
                -H "Api-Language: $API_LANGUAGE" \
                -H "Api-Version: $API_VERSION" \
-               -X GET "$API_ENDPOINT/backups/create-backup"
+               -X GET "$API_ENDPOINT_DEV/crons/generate-backup"

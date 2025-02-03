@@ -34,6 +34,7 @@ export const GROUP_ROUTES = {
     COUNTRIES: 'countries',
     LOGS: 'logs',
     USERS: 'users',
+    CRONS: 'crons',
     SAVES: 'saves'
 }
 
@@ -100,6 +101,10 @@ export const COUNTRIES_ROUTES = {
 export const SAVES_ROUTES = {
     LIST_SAVES: '/list',
     HANDLE_SAVE: '/handle'
+}
+
+export const CRONS_ROUTES = {
+    GENERATE_BACKUP: '/generate-backup'
 }
 
 export const BUSINESSES_ROUTES = {

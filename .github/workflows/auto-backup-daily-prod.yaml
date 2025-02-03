@@ -1,0 +1,24 @@
+name: Daily Backup Generator Production
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      CRON_SECRET_PASS_PROD: ${{ secrets.CRON_SECRET_PASS_PROD }}
+      API_ENDPOINT_PROD: ${{ secrets.API_ENDPOINT_PROD }}
+      API_LANGUAGE: ${{ secrets.API_LANGUAGE }}
+      API_VERSION: ${{ secrets.API_VERSION }}
+
+    steps:
+      - name: Daily Backup Generator
+        run: |
+          curl -H "Authorization: $CRON_SECRET_PASS_PROD" \
+               -H "Api-Language: $API_LANGUAGE" \
+               -H "Api-Version: $API_VERSION" \
+               -X GET "$API_ENDPOINT_PROD/crons/generate-backup"
