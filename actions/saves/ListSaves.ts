@@ -28,11 +28,19 @@ const ListSaves = async (c: Context) => {
                 .limit(FETCH_LIMIT)
                 .lean()
 
-            const saves = savesUnformatted.map((save: SaveInterface) => {
+            const savePromises = savesUnformatted.map(async (save) => {
+                const saved = await SaveModel.exists({ 
+                    User: user._id, 
+                    Business: save.Business._id 
+                })
+            
                 return {
-                    ...save?.Business
+                    ...save?.Business,
+                    Saved: saved ? true : false
                 }
             })
+            
+            const saves = await Promise.all(savePromises)
 
             if (saves) return await HttpResponder({
                 c,

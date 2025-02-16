@@ -51,9 +51,11 @@ export interface UserInterface {
     Role: UserRoleTypes
     Visits: number
     Businesses: number
+    DeletedBusinesses: number
     Saves: number
     Country: CountryInterface | null
     City: CityInterface | null
+    HasPendingBusinessSubmission: boolean
     Notifications: {
         OnBusinessStatuses: boolean
     }
@@ -123,7 +125,7 @@ export interface BusinessLocationInterface {
 
 export interface BusinessLinkInterface {
     Name: string
-    URL: string
+    Link: string
 }
 
 export interface BusinessInterface {
@@ -133,6 +135,7 @@ export interface BusinessInterface {
     Logo: string | null
     Description: string
     User: UserInterface
+    Category: CategoryInterface
     Website: string | null
     Email: string | null
     Status: BusinessStatusTypes

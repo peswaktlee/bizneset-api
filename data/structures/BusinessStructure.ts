@@ -21,6 +21,12 @@ const BusinessStructure: Schema<BusinessInterface> = new Schema(
             unique: false,
             ref: MODELS.USER
         },
+        Category: {
+            type: Schema.Types.ObjectId,
+            required: true,
+            unique: false,
+            ref: MODELS.CATEGORY
+        },
         Status: {
             type: String,
             required: true,
@@ -34,7 +40,7 @@ const BusinessStructure: Schema<BusinessInterface> = new Schema(
             default: null
         },
         Gallery: {
-            type: [String],
+            type: [Object],
             required: false,
             unique: false,
             default: []
@@ -58,7 +64,7 @@ const BusinessStructure: Schema<BusinessInterface> = new Schema(
             default: 0
         },
         Links: {
-            type: [String],
+            type: [Object],
             required: false,
             unique: false,
             default: []
