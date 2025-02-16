@@ -57,6 +57,12 @@ const UserStructure: Schema<UserInterface> = new Schema(
             unique: false,
             default: 0
         },
+        DeletedBusinesses: {
+            type: Number,
+            required: false,
+            unique: false,
+            default: 0
+        },
         Saves: {
             type: Number,
             required: false,
@@ -76,6 +82,12 @@ const UserStructure: Schema<UserInterface> = new Schema(
             unique: false,
             ref: MODELS.CITY,
             default: null
+        },
+        HasPendingBusinessSubmission: {
+            type: Boolean,
+            required: false,
+            unique: false,
+            default: false
         },
         Notifications: {
             OnBusinessStatuses: {

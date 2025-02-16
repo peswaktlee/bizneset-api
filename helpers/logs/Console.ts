@@ -8,7 +8,7 @@ import {
     LOGS_ROUTES
 } from '@/data/constants'
 
-const URL = `${HOST}/${GROUP_ROUTES.LOGS}${LOGS_ROUTES.INSERT_LOG}`
+const URL = `${HOST}/${GROUP_ROUTES.LOGS}${LOGS_ROUTES.CREATE_LOG}`
 
 const HEADERS = {
     'Content-Type': 'application/json',

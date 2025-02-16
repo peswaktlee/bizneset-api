@@ -10,7 +10,7 @@ const LogsRouter = (): HonoBase => {
     const router = new Hono()
 
     router.post(
-        LOGS_ROUTES.INSERT_LOG,
+        LOGS_ROUTES.CREATE_LOG,
         Connect,
         OptionalAuthMiddleware,
         InsertLog

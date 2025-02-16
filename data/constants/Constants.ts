@@ -17,7 +17,7 @@ export const MODELS = {
     COUNTRY: 'Country',
     LOG: 'Log',
     USER: 'User',
-    USER_SAVE: 'UserSave',
+    USER_SAVE: 'User-Save',
     BACKUP: 'Backup'
 }
 
@@ -39,11 +39,11 @@ export const GROUP_ROUTES = {
 }
 
 export const LOGS_ROUTES = {
-    INSERT_LOG: '/insert'
+    CREATE_LOG: '/create-log'
 }
 
 export const USER_ROUTES = {
-    AUTH_USER: '/auth'
+    AUTH_USER: '/auth-user'
 }
 
 export const LANGUAGES = {
@@ -71,8 +71,8 @@ export const CONTEXT_KEYS = {
 }
 
 export const CATEGORIES_ROUTES = {
-    CREATE_CATEGORY: '/create',
-    LIST_CATEGORIES: '/list'
+    CREATE_CATEGORY: '/create-category',
+    LIST_CATEGORIES: '/list-categories'
 }
 
 export const HEADER_KEYS = {
@@ -83,24 +83,25 @@ export const HEADER_KEYS = {
 }
 
 export const USERS_ROUTES = {
-    AUTH_USER: '/auth',
-    UPDATE_AVATAR: '/avatar',
-    UPDATE_USER: '/update'
+    AUTH_USER: '/auth-user',
+    UPDATE_AVATAR: '/avatar-user',
+    UPDATE_USER: '/update-user',
+    CLOSE_ACCOUNT: '/close-account'
 }
 
 export const CITIES_ROUTES = {
-    CREATE_CITY: '/create',
-    LIST_CITIES: '/list'
+    CREATE_CITY: '/create-city',
+    LIST_CITIES: '/list-cities'
 }
 
 export const COUNTRIES_ROUTES = {
-    CREATE_COUNTRY: '/create',
-    LIST_COUNTRIES: '/list'
+    CREATE_COUNTRY: '/create-country',
+    LIST_COUNTRIES: '/list-countries'
 }
 
 export const SAVES_ROUTES = {
-    LIST_SAVES: '/list',
-    HANDLE_SAVE: '/handle'
+    LIST_SAVES: '/list-user-saves',
+    HANDLE_SAVE: '/handle-save'
 }
 
 export const CRONS_ROUTES = {
@@ -108,12 +109,12 @@ export const CRONS_ROUTES = {
 }
 
 export const BUSINESSES_ROUTES = {
-    SUBMIT_BUSINESS: '/submit',
-    DELETE_BUSINESS: '/delete',
-    LIST_BUSINESSES: '/list',
-    VIEW_BUSINESS: '/view',
-    LIST_USER_BUSINESSES: '/user-list',
-    LIST_SIMILAR_BUSINESSES: '/similar-list'
+    SUBMIT_BUSINESS: '/submit-business',
+    DELETE_BUSINESS: '/delete-business',
+    LIST_BUSINESSES: '/list-businesses',
+    VIEW_BUSINESS: '/view-business',
+    LIST_USER_BUSINESSES: '/list-user-businesses',
+    LIST_SIMILAR_BUSINESSES: '/list-similar-businesses'
 }
 
 export const FILE_EXTENSIONS = {
@@ -135,6 +136,18 @@ export const CLOUDFLARE_CDN_PATHS = {
 export const BUSINESS_STATUSES = {
     PENDING: 'pending',
     APPROVED: 'approved',
-    REJECTED: 'rejected',
-    DELETED: 'deleted'
+    REJECTED: 'rejected'
 }
+
+export const GALLERY_NUMBER_ITEMS = [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+]
