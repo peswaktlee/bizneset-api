@@ -33,6 +33,12 @@ const BusinessStructure: Schema<BusinessInterface> = new Schema(
             unique: false,
             default: BUSINESS_STATUSES.PENDING
         },
+        RejectionNote: {
+            type: String,
+            required: false,
+            unique: false,
+            default: ''
+        },
         Logo: {
             type: String,
             required: false,

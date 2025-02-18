@@ -114,7 +114,10 @@ export const BUSINESSES_ROUTES = {
     LIST_BUSINESSES: '/list-businesses',
     VIEW_BUSINESS: '/view-business',
     LIST_USER_BUSINESSES: '/list-user-businesses',
-    LIST_SIMILAR_BUSINESSES: '/list-similar-businesses'
+    LIST_SIMILAR_BUSINESSES: '/list-similar-businesses',
+    APPROVE_BUSINESS: '/approve-business',
+    REJECT_BUSINESS: '/reject-business',
+    LIST_ADMIN_BUSINESSES: '/list-admin-businesses'
 }
 
 export const FILE_EXTENSIONS = {

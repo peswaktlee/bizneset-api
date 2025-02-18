@@ -8,6 +8,7 @@ import {
     BUSINESS_STATUSES, 
     CONTEXT_KEYS, 
     MODELS, 
+    USER_ROLES, 
     VIEW_BUSINESS_SELECTOR 
 } from '@/data/constants'
 
@@ -24,9 +25,10 @@ const ViewBusiness = async (c: Context) => {
 
         if (business) {
             const isApproved = business?.Status === BUSINESS_STATUSES.APPROVED
+            const isAdmin = user?.Role === USER_ROLES.ADMIN
             const isPendingButOwner = (business?.Status === BUSINESS_STATUSES.PENDING) && (user?._id?.toString() === business?.User?.toString())
 
-            if (isApproved || isPendingButOwner) {
+            if (isApproved || isPendingButOwner || isAdmin) {
                 if (isApproved) setImmediate(async () => {
                     await BusinessModel.updateOne({ _id: business?._id }, {
                         $inc: { Visits: 1 }
