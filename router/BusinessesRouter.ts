@@ -11,7 +11,10 @@ import {
     ListBusinesses,
     ViewBusiness,
     ListUserBusinesses,
-    ListSimilarBusinesses
+    ListSimilarBusinesses,
+    ApproveBusiness,
+    RejectBusiness,
+    ListAdminBusinesses
 } from '@/actions/businesses'
 
 const BusinessesRouter = (): HonoBase => {
@@ -57,6 +60,27 @@ const BusinessesRouter = (): HonoBase => {
         Connect, 
         OptionalAuthMiddleware, 
         ListSimilarBusinesses
+    )
+
+    router.post(
+        BUSINESSES_ROUTES.APPROVE_BUSINESS, 
+        Connect, 
+        AuthMiddleware, 
+        ApproveBusiness
+    )
+
+    router.post(
+        BUSINESSES_ROUTES.REJECT_BUSINESS, 
+        Connect, 
+        AuthMiddleware, 
+        RejectBusiness
+    )
+
+    router.post(
+        BUSINESSES_ROUTES.LIST_ADMIN_BUSINESSES, 
+        Connect, 
+        AuthMiddleware, 
+        ListAdminBusinesses
     )
 
     return router

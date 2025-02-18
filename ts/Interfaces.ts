@@ -139,6 +139,7 @@ export interface BusinessInterface {
     Website: string | null
     Email: string | null
     Status: BusinessStatusTypes
+    RejectionNote: string
     Links: Array<BusinessLinkInterface>
     LinkCount: number
     Gallery: Array<string>
