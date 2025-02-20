@@ -2,7 +2,7 @@ import type { Context } from 'hono'
 
 import { BusinessModel, SaveModel } from '@/data/models'
 import { DecodeBody, HttpResponder } from '@/helpers/http'
-import { Console } from '@/helpers/logs'
+import { Analytics, Console } from '@/helpers/logs'
 
 import { 
     BUSINESS_STATUSES, 
@@ -33,12 +33,18 @@ const ViewBusiness = async (c: Context) => {
                     await BusinessModel.updateOne({ _id: business?._id }, {
                         $inc: { Visits: 1 }
                     })
+
+                    Analytics.Increase([
+                        'TotalBusinessesViews'
+                    ])
                 })
 
                 const isSaved = await SaveModel.exists({ 
                     Business: business?._id?.toString(), 
                     User: user?._id?.toString()
                 })
+
+                
 
                 return await HttpResponder({
                     c,

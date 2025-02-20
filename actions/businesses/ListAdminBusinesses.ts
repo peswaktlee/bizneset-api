@@ -1,17 +1,16 @@
 import type { Context } from 'hono'
 
 import { DecodeBody, HttpResponder } from '@/helpers/http'
-import { Console } from '@/helpers/logs'
+import { Analytics, Console } from '@/helpers/logs'
 import { BusinessModel } from '@/data/models'
 import { LIST_BUSINESSES_SELECTOR } from '@/data/constants/Selectors'
-import { BUSINESS_STATUSES, CONTEXT_KEYS, FETCH_LIMIT, USER_ROLES } from '@/data/constants'
+import { BUSINESS_STATUSES, CONTEXT_KEYS, FETCH_LIMIT } from '@/data/constants'
 
 const ListAdminBusinesses = async (c: Context) => {
     try {
-        const user = c.get(CONTEXT_KEYS.USER)
-        const isAdmin = user?.Role === USER_ROLES.ADMIN
+        const admin = c.get(CONTEXT_KEYS.ADMIN)
 
-        if (isAdmin) {
+        if (admin) {
             const { offset } = await DecodeBody(c)
 
             const filters: Record<string, unknown> = {
@@ -33,6 +32,10 @@ const ListAdminBusinesses = async (c: Context) => {
                 setImmediate(async () => {
                     await BusinessModel.updateMany({ _id: { $in: businessesIds } }, {
                         $inc: { Reach: 1 }
+                    })
+
+                    Analytics.IncreaseDecreaseBulk({
+                        TotalBusinessesReach: businessesIds?.length
                     })
                 })
 

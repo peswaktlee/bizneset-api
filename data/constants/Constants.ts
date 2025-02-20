@@ -1,5 +1,4 @@
-export const FETCH_LIMIT = 10
-export const SIMILAR_BUSINESSES_FETCH_LIMIT = 8
+import { FULL_HOST } from '@/data/constants/Envs'
 
 export const USER_ROLES = {
     ADMIN: 'admin',
@@ -18,7 +17,8 @@ export const MODELS = {
     LOG: 'Log',
     USER: 'User',
     USER_SAVE: 'User-Save',
-    BACKUP: 'Backup'
+    BACKUP: 'Backup',
+    ANALYTIC: 'Analytic'
 }
 
 export const LOG_TYPES = {
@@ -32,18 +32,10 @@ export const GROUP_ROUTES = {
     CATEGORIES: 'categories',
     CITIES: 'cities',
     COUNTRIES: 'countries',
-    LOGS: 'logs',
+    GENERALS: 'generals',
     USERS: 'users',
     CRONS: 'crons',
     SAVES: 'saves'
-}
-
-export const LOGS_ROUTES = {
-    CREATE_LOG: '/create-log'
-}
-
-export const USER_ROUTES = {
-    AUTH_USER: '/auth-user'
 }
 
 export const LANGUAGES = {
@@ -52,6 +44,11 @@ export const LANGUAGES = {
 
 export const API_VERSIONS = {
     V1: '1'
+}
+
+export const METHODS = {
+    POST: 'POST',
+    GET: 'GET'
 }
 
 export const ENVIRONMENTS = {
@@ -153,4 +150,32 @@ export const GALLERY_NUMBER_ITEMS = [
     8,
     9,
     10
+]
+
+export const GENERALS_ROUTES = {
+    LIST_ANALYTICS: '/list-analytics',
+    CREATE_LOG: '/create-log'
+}
+
+export const CONSOLE_LOG_HEADERS = {
+    'Content-Type': 'application/json',
+    'Api-Version': API_VERSIONS.V1,
+    'Api-Language': LANGUAGES.ALBANIAN
+}
+
+export const FETCH_LIMIT = 10
+export const SIMILAR_BUSINESSES_FETCH_LIMIT = 8
+export const CONSOLE_LOG_URL = `${FULL_HOST}/${GROUP_ROUTES.GENERALS}${GENERALS_ROUTES.CREATE_LOG}`
+
+export const SIMILAR_BUSINESSES_SORTS: Array<Record<string, number>> = [
+    { Created_At: 1 },
+    { Created_At: -1 },
+    { Reach: 1 },
+    { Reach: -1 },
+    { Name: 1 },
+    { Name: -1 },
+    { Slug: 1 },
+    { Slug: -1 },
+    { Updated_At: 1 },
+    { Updated_At: -1 }
 ]

@@ -1,3 +1,7 @@
+import Analytics from '@/helpers/logs/Analytics'
 import Console from '@/helpers/logs/Console'
 
-export { Console }
+export { 
+    Analytics,
+    Console
+}

@@ -12,7 +12,12 @@ const InsertLog = async (c: Context) => {
     try {
         const user = c.get(CONTEXT_KEYS.USER)
 
-        const { message, func, path, type } = await DecodeBody(c)
+        const { 
+            message, 
+            func, 
+            path, 
+            type 
+        } = await DecodeBody(c)
 
         const date = CurrentTimestamp()
 

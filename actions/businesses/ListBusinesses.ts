@@ -1,7 +1,7 @@
 import type { Context } from 'hono'
 
 import { DecodeBody, HttpResponder } from '@/helpers/http'
-import { Console } from '@/helpers/logs'
+import { Analytics, Console } from '@/helpers/logs'
 import { BusinessModel, SaveModel } from '@/data/models'
 import { ObjectId } from '@/helpers/libs/mongo'
 import { LIST_BUSINESSES_SELECTOR } from '@/data/constants/Selectors'
@@ -47,6 +47,10 @@ const ListBusinesses = async (c: Context) => {
             setImmediate(async () => {
                 await BusinessModel.updateMany({ _id: { $in: businessesIds } }, {
                     $inc: { Reach: 1 }
+                })
+
+                Analytics.IncreaseDecreaseBulk({
+                    TotalBusinessesReach: businessesIds?.length
                 })
             })
 

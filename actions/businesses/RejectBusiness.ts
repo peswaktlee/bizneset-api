@@ -9,68 +9,56 @@ import { BUSINESS_STATUSES, CONTEXT_KEYS, USER_ROLES } from '@/data/constants'
 
 const SubmitBusiness = async (c: Context) => {
     try {
-        const user = c.get(CONTEXT_KEYS.USER)
+        const admin = c.get(CONTEXT_KEYS.ADMIN)
 
-        if (user) {
-            const isAdmin = user.Role === USER_ROLES.ADMIN
+        if (admin) {
+            const { businessId, rejectionNote } = await DecodeBody(c)
 
-            if (isAdmin) {
-                const { businessId, rejectionNote } = await DecodeBody(c)
+            const business = await BusinessModel.findOne({ 
+                _id: ObjectId(businessId),
+                Status: BUSINESS_STATUSES.PENDING
+            })
+    
+            if (business) {
+                business.Status = BUSINESS_STATUSES.REJECTED
+                business.RejectionNote = rejectionNote
+                business.Updated_At = CurrentTimestamp()
+    
+                await business.save()
 
-                const business = await BusinessModel.findOne({ 
-                    _id: ObjectId(businessId),
-                    Status: BUSINESS_STATUSES.PENDING
-                })
+                await UserModel.updateOne(
+                    {
+                        _id: ObjectId(business?.User?.toString())
+                    }, 
+                    {
+                        HasPendingBusinessSubmission: false
+                    }
+                )
     
-                if (business) {
-                    business.Status = BUSINESS_STATUSES.REJECTED
-                    business.RejectionNote = rejectionNote
-                    business.Updated_At = CurrentTimestamp()
-    
-                    await business.save()
-
-                    await UserModel.updateOne(
-                        {
-                            _id: ObjectId(business?.User?.toString())
-                        }, 
-                        {
-                            HasPendingBusinessSubmission: false
-                        }
-                    )
-    
-                    return await HttpResponder({
-                        c,
-                        success: true,
-                        code: 200,
-                        message: 'business-has-been-rejected-successfully',
-                        data: null
-                    })
-                }
-    
-                else return await HttpResponder({
+                return await HttpResponder({
                     c,
-                    success: false,
-                    code: 400,
-                    data: null,
-                    message: 'business-could-not-be-found-when-handling-business-rejection'
+                    success: true,
+                    code: 200,
+                    message: 'business-has-been-rejected-successfully',
+                    data: null
                 })
             }
-
+    
             else return await HttpResponder({
                 c,
                 success: false,
-                code: 403,
+                code: 400,
                 data: null,
-                message: 'user-is-not-authorized-to-handle-businesses-rejections'
+                message: 'business-could-not-be-found-when-handling-business-rejection'
             })
         }
 
         else return await HttpResponder({
             c,
             success: false,
-            code: 500,
+            code: 403,
             data: null,
-            message: 'user-could-not-be-found-when-handling-business-rejection'
+            message: 'user-is-not-authorized-to-handle-businesses-rejections'
         })
     }
 

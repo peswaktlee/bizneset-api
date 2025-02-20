@@ -6,6 +6,7 @@ import { UserModel } from '@/data/models'
 import { HttpResponder } from '@/helpers/http'
 import { CheckDifference, CurrentTimestamp } from '@/helpers/dates'
 import { AutoUpdateAvatar } from '@/actions/users'
+import { Analytics } from '@/helpers/logs'
 
 const LoginUser = async (c: Context, user: UserInterface, avatar: string) => {
     let shouldUpdate = false
@@ -42,6 +43,10 @@ const LoginUser = async (c: Context, user: UserInterface, avatar: string) => {
                 Visits: 1
             }
         })
+
+        Analytics.Increase([
+            'TotalUserVisits'
+        ])
     }, 1)
 
     return await HttpResponder({

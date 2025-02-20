@@ -162,3 +162,13 @@ export type BackupInterface = {
     Started_Generation_At: Date
     Finished_Generation_At: Date
 }
+
+export interface AnalyticInterface {
+    TotalUsers: number
+    TotalBusinesses: number
+    TotalBusinessesViews: number
+    TotalBusinessesReach: number
+    TotalUserVisits: number
+    TotalBusinessSaves: number
+    Updated_At: Date
+}

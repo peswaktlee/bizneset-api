@@ -14,7 +14,6 @@ export const CountryListSelector = {
 }
 
 export const CategoryListSelector = {
-    _id: 0,
     Name: 1,
     Slug: 1,
     Businesses: 1

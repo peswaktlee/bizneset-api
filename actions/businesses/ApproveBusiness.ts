@@ -1,75 +1,67 @@
 import type { Context } from 'hono'
 
 import { DecodeBody, HttpResponder } from '@/helpers/http'
-import { Console } from '@/helpers/logs'
+import { Analytics, Console } from '@/helpers/logs'
 import { BusinessModel, UserModel } from '@/data/models'
 import { CurrentTimestamp } from '@/helpers/dates'
 import { ObjectId } from '@/helpers/libs/mongo'
-import { BUSINESS_STATUSES, CONTEXT_KEYS, USER_ROLES } from '@/data/constants'
+import { BUSINESS_STATUSES, CONTEXT_KEYS } from '@/data/constants'
 
-const SubmitBusiness = async (c: Context) => {
+const ApproveBusiness = async (c: Context) => {
     try {
-        const user = c.get(CONTEXT_KEYS.USER)
+        const admin = c.get(CONTEXT_KEYS.ADMIN)
 
-        if (user) {
-            const isAdmin = user.Role === USER_ROLES.ADMIN
+        if (admin) {
+            const { businessId } = await DecodeBody(c)
 
-            if (isAdmin) {
-                const { businessId } = await DecodeBody(c)
+            const business = await BusinessModel.findOne({ 
+                _id: ObjectId(businessId),
+                Status: BUSINESS_STATUSES.PENDING
+            })
 
-                const business = await BusinessModel.findOne({ 
-                    _id: ObjectId(businessId),
-                    Status: BUSINESS_STATUSES.PENDING
-                })
-    
-                if (business) {
-                    business.Status = BUSINESS_STATUSES.APPROVED
-                    business.Updated_At = CurrentTimestamp()
-    
-                    await business.save()
+            if (business) {
+                business.Status = BUSINESS_STATUSES.APPROVED
+                business.Updated_At = CurrentTimestamp()
 
-                    await UserModel.updateOne(
-                        {
-                            _id: ObjectId(business?.User?.toString())
-                        }, 
-                        {
-                            HasPendingBusinessSubmission: false
-                        }
-                    )
-    
-                    return await HttpResponder({
-                        c,
-                        success: true,
-                        code: 200,
-                        message: 'business-has-been-approved-successfully',
-                        data: null
-                    })
-                }
-    
-                else return await HttpResponder({
+                await business.save()
+
+                await UserModel.updateOne(
+                    {
+                        _id: ObjectId(business?.User?.toString())
+                    }, 
+                    {
+                        HasPendingBusinessSubmission: false
+                    }
+                )
+
+                Analytics.Increase([
+                    'TotalBusinesses'
+                ])
+
+                return await HttpResponder({
                     c,
-                    success: false,
-                    code: 400,
-                    data: null,
-                    message: 'business-could-not-be-found-when-handling-business-approval'
+                    success: true,
+                    code: 200,
+                    message: 'business-has-been-approved-successfully',
+                    data: null
                 })
             }
 
             else return await HttpResponder({
                 c,
                 success: false,
-                code: 403,
+                code: 400,
                 data: null,
-                message: 'user-is-not-authorized-to-handle-businesses-approvals'
+                message: 'business-could-not-be-found-when-handling-business-approval'
             })
         }
 
         else return await HttpResponder({
             c,
             success: false,
-            code: 500,
+            code: 403,
             data: null,
-            message: 'user-could-not-be-found-when-handling-business-approval'
+            message: 'user-is-not-authorized-to-handle-businesses-approvals'
         })
     }
 
@@ -86,4 +78,4 @@ const SubmitBusiness = async (c: Context) => {
     }
 }
 
-export default SubmitBusiness
+export default ApproveBusiness
