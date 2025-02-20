@@ -1,7 +1,7 @@
 // Generals
 export const HOST: string = process.env.HOST as string
 export const PORT: string = process.env.PORT as string
-export const UNIVERSE: string = process.env.UNIVERSE as string
+export const FULL_HOST: string = process.env.FULL_HOST as string
 export const ENV: string = process.env.ENV as string
 export const ORIGINS: string = process.env.ORIGINS as string
 export const SECRET_KEY: string = process.env.SECRET_KEY as string

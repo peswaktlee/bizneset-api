@@ -1,10 +1,10 @@
 import type { Context } from 'hono'
 
 import { DecodeBody, HttpResponder } from '@/helpers/http'
-import { Console } from '@/helpers/logs'
+import { Analytics, Console } from '@/helpers/logs'
 import { BusinessModel, SaveModel } from '@/data/models'
 import { LIST_SIMILAR_BUSINESSES_SELECTOR } from '@/data/constants/Selectors'
-import { BUSINESS_STATUSES, CONTEXT_KEYS, SIMILAR_BUSINESSES_FETCH_LIMIT } from '@/data/constants'
+import { BUSINESS_STATUSES, CONTEXT_KEYS, SIMILAR_BUSINESSES_FETCH_LIMIT, SIMILAR_BUSINESSES_SORTS } from '@/data/constants'
 
 const ListSimilarBusinesses = async (c: Context) => {
     try {
@@ -17,11 +17,15 @@ const ListSimilarBusinesses = async (c: Context) => {
             _id: { $ne: businessId }, 
             Status: BUSINESS_STATUSES.APPROVED
         }
+
+        const randomSort = SIMILAR_BUSINESSES_SORTS[Math.floor(Math.random() * SIMILAR_BUSINESSES_SORTS.length)]
             
         const businesses = await BusinessModel
             .find(filters)
             .select(LIST_SIMILAR_BUSINESSES_SELECTOR)
             .limit(SIMILAR_BUSINESSES_FETCH_LIMIT)
+            // @ts-ignore
+            .sort(randomSort)
             .lean()
 
         if (businesses) {
@@ -30,6 +34,10 @@ const ListSimilarBusinesses = async (c: Context) => {
             setImmediate(async () => {
                 await BusinessModel.updateMany({ _id: { $in: businessesIds } }, {
                     $inc: { Reach: 1 }
+                })
+
+                Analytics.IncreaseDecreaseBulk({
+                    TotalBusinessesReach: businessesIds?.length
                 })
             })
 

@@ -8,6 +8,7 @@ import { BackupDate, CurrentTimestamp } from '@/helpers/dates'
 import { MODELS } from '@/data/constants'
 
 import { 
+    AnalyticModel,
     BackupModel,
     BusinessModel,
     CategoryModel,
@@ -48,6 +49,7 @@ const GenerateBackup = async (c: Context) => {
             const logs = await LogModel.find().lean()
             const saves = await SaveModel.find().lean()
             const users = await UserModel.find().lean()
+            const analytics = await AnalyticModel.find().lean()
 
             const date = BackupDate()
 
@@ -59,6 +61,7 @@ const GenerateBackup = async (c: Context) => {
             const { size: sLogs, path: pLogs } = await Backup(FormatModelBackupName(MODELS.LOG), date, logs)
             const { size: sSaves, path: pSaves } = await Backup(FormatModelBackupName(MODELS.USER_SAVE), date, saves)
             const { size: sUsers, path: pUsers } = await Backup(FormatModelBackupName(MODELS.USER), date, users)
+            const { size: sAnalytics, path: pAnalytics } = await Backup(FormatModelBackupName(MODELS.ANALYTIC), date, analytics)
 
             const endTime = Date.now()
             const miliseconds = endTime - startTime
@@ -71,7 +74,8 @@ const GenerateBackup = async (c: Context) => {
                 sCountries +
                 sLogs +
                 sSaves +
-                sUsers
+                sUsers +
+                sAnalytics
 
             const length = 
                 backups.length +
@@ -81,7 +85,8 @@ const GenerateBackup = async (c: Context) => {
                 countries.length +
                 logs.length +
                 saves.length +
-                users.length
+                users.length +
+                analytics.length
 
             backup.Time = miliseconds
             backup.Items = length
@@ -95,8 +100,8 @@ const GenerateBackup = async (c: Context) => {
                 pCountries,
                 pLogs,
                 pSaves,
-                pUsers
-                
+                pUsers,
+                pAnalytics
             ]
 
             backup.Finished_Generation_At = CurrentTimestamp()

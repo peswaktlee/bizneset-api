@@ -13,7 +13,7 @@ const SubmitBusiness = async (c: Context) => {
         const user = c.get(CONTEXT_KEYS.USER)
 
         if (user) {
-            const hasOnPending = BusinessModel.exists({ 
+            const hasOnPending = await BusinessModel.exists({ 
                 User: user?._id, 
                 Status: BUSINESS_STATUSES.PENDING
             })
@@ -22,24 +22,36 @@ const SubmitBusiness = async (c: Context) => {
                 const { 
                     title, 
                     description,
+                    website,
+                    category,
+                    phone,
+                    email,
                     logo,
                     gallery,
                     links,
-                    link,
                     locations
                 } = await DecodeBody(c)
 
                 const slug = await GenerateBusinessSlug(title)
+                const galleryPhotos = []
+                const logoFormatted = logo?.Media ? logo : null
+
+                for (const photo of gallery) if (photo?.Media) {
+                    galleryPhotos.push(photo)
+                }
 
                 const business = new BusinessModel({ 
                     Title: title,
                     Description: description,
                     Slug: slug,
-                    Gallery: gallery,
-                    Logo: logo,
-                    User: ObjectId(user._id),
+                    Gallery: galleryPhotos,
+                    Logo: logoFormatted,
+                    Category: category,
+                    User: ObjectId(user?._id),
                     Links: links,
-                    link: link,
+                    Website: website,
+                    Phone: phone,
+                    Email: email,
                     Locations: locations,
                     Created_At: CurrentTimestamp()
                 })
@@ -47,6 +59,7 @@ const SubmitBusiness = async (c: Context) => {
                 await business.save()
 
                 user.Businesses = user.Businesses + 1
+                user.HasPendingBusinessSubmission = true
                 user.Updated_At = CurrentTimestamp()
 
                 await user.save()

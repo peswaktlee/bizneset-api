@@ -8,6 +8,7 @@ import { CurrentTimestamp } from '@/helpers/dates'
 import { DeleteFile } from '@/helpers/libs/cloudflare'
 
 import { 
+    BUSINESS_STATUSES,
     CLOUDFLARE_BUCKETS, 
     CLOUDFLARE_CDN_PATHS, 
     CONTEXT_KEYS, 
@@ -38,10 +39,28 @@ const DeleteBusiness = async (c: Context) => {
             })
 
             else {
+                let data = null
+                const isDeletedBusinessPending = business.Status === BUSINESS_STATUSES.PENDING
+
                 await business.deleteOne()
 
                 user.Businesses = user.Businesses - 1
                 user.DeletedBusinesses = user.DeletedBusinesses + 1
+
+                if (isDeletedBusinessPending) {
+                    const hasPendingBusinesses = await BusinessModel.exists({ 
+                        User: ObjectId(user?._id),
+                        Status: BUSINESS_STATUSES.PENDING
+                    })
+
+                    if (!hasPendingBusinesses) {
+                        user.HasPendingBusinessSubmission = false
+
+                        data = {
+                            HasPendingBusinessSubmission: false
+                        }
+                    }
+                }
 
                 user.Updated_At = CurrentTimestamp()
 
@@ -67,7 +86,6 @@ const DeleteBusiness = async (c: Context) => {
                     )
                 }
                 
-
                 for (const path of GALLERY_NUMBER_ITEMS) {
                     const pathString = `${CLOUDFLARE_CDN_PATHS.BUSINESSES}/${business?._id}/${path}.${FILE_EXTENSIONS.WEBP}`
                     await DeleteFile(pathString, CLOUDFLARE_BUCKETS.CDN)
@@ -81,7 +99,7 @@ const DeleteBusiness = async (c: Context) => {
                     success: true,
                     code: 200,
                     message: 'business-was-deleted-successfully',
-                    data: null
+                    data
                 })
             }
         }

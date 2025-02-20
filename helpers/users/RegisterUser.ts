@@ -4,7 +4,7 @@ import { UserModel } from '@/data/models'
 import { HttpResponder } from '@/helpers/http'
 import { CurrentTimestamp } from '@/helpers/dates'
 import { DeleteFirebaseAccount } from '@/helpers/libs/firebase'
-import { Console } from '@/helpers/logs'
+import { Analytics, Console } from '@/helpers/logs'
 import { AddContact } from '@/helpers/libs/resend'
 import { AutoUpdateAvatar } from '@/actions/users'
 
@@ -39,6 +39,10 @@ const RegisterUser = async (props: RegisterUserFunctionProps) => {
         })
 
         await initial_user.save()
+
+        Analytics.Increase([
+            'TotalUsers'
+        ])
 
         await AutoUpdateAvatar(avatar, uid)
         await AddContact(initial_user)

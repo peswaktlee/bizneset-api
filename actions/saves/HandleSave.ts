@@ -1,7 +1,7 @@
 import type { Context } from 'hono'
 
 import { DecodeBody, HttpResponder } from '@/helpers/http'
-import { Console } from '@/helpers/logs'
+import { Analytics, Console } from '@/helpers/logs'
 import { BusinessModel, SaveModel } from '@/data/models'
 import { CurrentTimestamp } from '@/helpers/dates'
 import { BUSINESS_STATUSES, CONTEXT_KEYS } from '@/data/constants'
@@ -39,6 +39,10 @@ const HandleSave = async (c: Context) => {
                     user.Updated_At = CurrentTimestamp()
 
                     await user.save()
+
+                    Analytics.Decrease([
+                        'TotalBusinessSaves'
+                    ])
     
                     return await HttpResponder({
                         c,
@@ -70,6 +74,10 @@ const HandleSave = async (c: Context) => {
                     user.Updated_At = CurrentTimestamp()
 
                     await user.save()
+
+                    Analytics.Increase([
+                        'TotalBusinessSaves'
+                    ])
     
                     return await HttpResponder({
                         c,
