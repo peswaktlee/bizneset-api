@@ -108,7 +108,20 @@ const sq_AL = {
     'category-name-max-error': 'Emri i kategorisë duhet të jetë më i shkurtë se 64 karaktere!',
     'category-slug-should-be-string': 'Slugu i kategorisë duhet të jetë string!',
     'category-slug-min-error': 'Slugu i kategorisë duhet të jetë më i gjatë se 2 karaktere!',
-    'category-slug-max-error': 'Slugu i kategorisë duhet të jetë më i shkurtë se 64 karaktere!'
+    'category-slug-max-error': 'Slugu i kategorisë duhet të jetë më i shkurtë se 64 karaktere!',
+    'business-could-not-be-handled-for-approval-for-an-unknown-reason': 'Business could not be handled for approval for an unknown reason.',
+    'user-is-not-authorized-to-handle-businesses-approvals': 'User is not authorized to handle businesses approvals.',
+    'user-could-not-be-found-when-handling-business-approval': 'User could not be found when handling business approval.',
+    'business-could-not-be-found-when-handling-business-approval': 'Business could not be found when handling business approval.',
+    'business-has-been-approved-successfully': 'Business has been approved successfully.',
+    'business-has-been-rejected-successfully': 'Business has been rejected successfully.',
+    'business-could-not-be-handled-for-rejection-for-an-unknown-reason': 'Business could not be handled for rejection for an unknown reason.',
+    'user-could-not-be-found-when-handling-business-rejection': 'User could not be found when handling business rejection.',
+    'user-is-not-authorized-to-handle-businesses-rejections': 'User is not authorized to handle businesses rejections.',
+    'business-could-not-be-found-when-handling-business-rejection': 'Business could not be found when handling business rejection.',
+    'something-went-wrong-while-listing-businesses-for-approval': 'Something went wrong while listing businesses for approval.',
+    'user-is-not-authorized-to-list-businesses-for-approval': 'User is not authorized to list businesses for approval.',
+    'businesses-for-approval-where-listed-successfully': 'Businesses for approval where listed successfully.'
 }
 
 export default sq_AL

@@ -4,7 +4,7 @@ import { DecodeBody, HttpResponder } from '@/helpers/http'
 import { Console } from '@/helpers/logs'
 import { BusinessModel, SaveModel } from '@/data/models'
 import { CurrentTimestamp } from '@/helpers/dates'
-import { CONTEXT_KEYS } from '@/data/constants'
+import { BUSINESS_STATUSES, CONTEXT_KEYS } from '@/data/constants'
 
 const HandleSave = async (c: Context) => {
     try {
@@ -13,7 +13,10 @@ const HandleSave = async (c: Context) => {
         if (user) {
             const { businessId } = await DecodeBody(c)
 
-            const business = await BusinessModel.findOne({ _id: businessId })
+            const business = await BusinessModel.findOne({ 
+                _id: businessId, 
+                Status: BUSINESS_STATUSES.APPROVED 
+            })
 
             if (business) {
                 const saveExists = await SaveModel.findOne({
