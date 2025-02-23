@@ -3,12 +3,12 @@
 import type { FC } from 'react'
 
 import { useEffect } from 'react'
-import { PUBLIC_SITE } from '@/data/constants'
+import { FULL_APP_HOST } from '@/data/constants'
 
 const Page: FC = (): null => {
     useEffect(() => {
         if (typeof window !== 'undefined') {
-            window.location.href = PUBLIC_SITE
+            window.location.href = FULL_APP_HOST
         }
     }, [])
 

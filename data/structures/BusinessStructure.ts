@@ -111,10 +111,54 @@ const BusinessStructure: Schema<BusinessInterface> = new Schema(
             unique: false,
             default: 0
         },
+        Mails: {
+            OnApprovalMail: {
+                type: Boolean,
+                required: false,
+                unique: false,
+                default: false
+            },
+            OnRejectionMail: {
+                type: Boolean,
+                required: false,
+                unique: false,
+                default: false
+            },
+            OnKViewsMail: {
+                type: Boolean,
+                required: false,
+                unique: false,
+                default: false
+            },
+            OnKKViewsMail: {
+                type: Boolean,
+                required: false,
+                unique: false,
+                default: false
+            },
+            OnKKKViewsMail: {
+                type: Boolean,
+                required: false,
+                unique: false,
+                default: false
+            },
+            OnKKKKViewsMail: {
+                type: Boolean,
+                required: false,
+                unique: false,
+                default: false
+            }
+        },
         Created_At: {
             type: Date,
             required: true,
             unique: false
+        },
+        Delete_At: {
+            type: Date,
+            required: false,
+            unique: false,
+            default: null
         },
         Updated_At: {
             type: Date,

@@ -3,6 +3,7 @@ import type { Context } from 'hono'
 import { BusinessModel, SaveModel } from '@/data/models'
 import { DecodeBody, HttpResponder } from '@/helpers/http'
 import { Analytics, Console } from '@/helpers/logs'
+import { CalculateViewsForEmail } from '@/helpers/businesses'
 
 import { 
     BUSINESS_STATUSES, 
@@ -29,22 +30,31 @@ const ViewBusiness = async (c: Context) => {
             const isPendingButOwner = (business?.Status === BUSINESS_STATUSES.PENDING) && (user?._id?.toString() === business?.User?.toString())
 
             if (isApproved || isPendingButOwner || isAdmin) {
-                if (isApproved) setImmediate(async () => {
-                    await BusinessModel.updateOne({ _id: business?._id }, {
-                        $inc: { Visits: 1 }
-                    })
+                let visits = business?.Visits || 0
 
-                    Analytics.Increase([
-                        'TotalBusinessesViews'
-                    ])
-                })
+                if (isApproved) {
+                    visits += 1
+
+                    setImmediate(async () => {
+                        await BusinessModel.updateOne({ _id: business?._id }, {
+                            $inc: { Visits: 1 }
+                        })
+    
+                        Analytics.Increase([
+                            'TotalBusinessesViews'
+                        ])
+                    })
+                }
 
                 const isSaved = await SaveModel.exists({ 
                     Business: business?._id?.toString(), 
                     User: user?._id?.toString()
                 })
 
-                
+                const userId = business?.User?.toString()
+                const views = visits
+
+                await CalculateViewsForEmail(views, userId, business)
 
                 return await HttpResponder({
                     c,

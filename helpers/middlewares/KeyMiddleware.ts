@@ -12,7 +12,6 @@ const KeyMiddleware = async (c: Context, next: Next) => {
             const isValid = SECRET_KEY === authorization
 
             if (isValid) return await next()
-
             else return await HttpResponder({
                 c,
                 success: false,

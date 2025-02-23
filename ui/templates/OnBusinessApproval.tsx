@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import type { OnWelcomeEmailProps } from '@/ts'
+import type { OnBusinessApprovalProps } from '@/ts'
 
 import { Translation } from '@/helpers/generals'
 import { ASSETS, SOCIAL_MEDIAS } from '@/data/constants'
@@ -21,27 +21,33 @@ import {
 } from '@react-email/components'
 
 import {
-    onWelcomeMain,
-    onWelcomeContainer,
-    onWelcomeBox,
-    onWelcomeParagraph,
-    onWelcomeLogo,
-    onWelcomeTitle,
-    onWelcomeFooter,
-    onWelcomeFooterCopyright,
-    onWelcomeGradientBreakline,
-    onWelcomeSocialButton,
-    onWelcomeSocialsContainer,
-    onWelcomeButtonLogo,
-    onWelcomeParagraphBold,
-    onWelcomeEndTextStyle
+    onBusinessApprovalMain,
+    onBusinessApprovalContainer,
+    onBusinessApprovalBox,
+    onBusinessApprovalParagraph,
+    onBusinessApprovalLogo,
+    onBusinessApprovalTitle,
+    onBusinessApprovalFooter,
+    onBusinessApprovalFooterCopyright,
+    onBusinessApprovalGradientBreakline,
+    onBusinessApprovalSocialButton,
+    onBusinessApprovalSocialsContainer,
+    onBusinessApprovalButtonLogo,
+    onBusinessApprovalParagraphBold,
+    onBusinessApprovalEndTextStyle,
+    onBusinessApprovalButton
 } from '@/ui/styles'
 
 const siteUrl = FULL_APP_HOST
 const logoUrl = ASSETS.LOGO_BLACK_FULL
 
-export const OnWelcome = (props: OnWelcomeEmailProps) => {
-    const { subject, userName } = props
+export const OnBusinessApproval = (props: OnBusinessApprovalProps) => {
+    const { 
+        subject, 
+        userName, 
+        businessName, 
+        businessLink
+    } = props
 
     return (
         <Html>
@@ -60,51 +66,55 @@ export const OnWelcome = (props: OnWelcomeEmailProps) => {
                 {subject}
             </Preview>
 
-            <Body style={onWelcomeMain}>
-                <Container style={onWelcomeContainer}>
-                    <Section style={onWelcomeBox}>
+            <Body style={onBusinessApprovalMain}>
+                <Container style={onBusinessApprovalContainer}>
+                    <Section style={onBusinessApprovalBox}>
                         <Button 
-                            style={onWelcomeButtonLogo} 
+                            style={onBusinessApprovalButtonLogo} 
                             href={siteUrl} 
                             target='_blank'
                         >
                             <Img
                                 width='118'
                                 src={logoUrl}
-                                style={onWelcomeLogo}
+                                style={onBusinessApprovalLogo}
                             />
                         </Button>
                         
-                        <Section style={onWelcomeGradientBreakline} />
+                        <Section style={onBusinessApprovalGradientBreakline} />
 
-                        <Text style={onWelcomeTitle}>
-                            {Translation('salam')}, {userName || Translation('user')} 👋
+                        <Text style={onBusinessApprovalTitle}>
+                            {userName || Translation('user')}, {Translation('your-business')} {businessName ? `"${businessName}"` : ''} {Translation('is-approved')} ✅
                         </Text>
                     
-                        <Text style={onWelcomeParagraph}>
-                            {Translation('on-welcome-paragraph')}
+                        <Text style={onBusinessApprovalParagraph}>
+                            {Translation('on-business-approval-paragraph')}
                         </Text>
 
-                        <Text style={onWelcomeParagraph}>
-                            {Translation('on-welcome-paragraph-2')}
-                        </Text>
+                        <Button 
+                            style={onBusinessApprovalButton} 
+                            href={businessLink} 
+                            target='_blank'
+                        >
+                            {Translation('view-business')}
+                        </Button>
 
-                        <Section style={onWelcomeEndTextStyle}>
-                            <Text style={onWelcomeParagraph}>
+                        <Section style={onBusinessApprovalEndTextStyle}>
+                            <Text style={onBusinessApprovalParagraph}>
                                 {Translation('thank-you')},
                             </Text>
-
-                            <Text style={onWelcomeParagraphBold}>
+                        
+                            <Text style={onBusinessApprovalParagraphBold}>
                                 {Translation('our-team')}
                             </Text>
                         </Section>
                     </Section>
                 </Container>
 
-                <Container style={onWelcomeFooter}>
-                    <Row align='center' style={onWelcomeSocialsContainer}>
+                <Container style={onBusinessApprovalFooter}>
+                    <Row align='center' style={onBusinessApprovalSocialsContainer}>
                         <Button 
-                            style={onWelcomeSocialButton} 
+                            style={onBusinessApprovalSocialButton} 
                             href={SOCIAL_MEDIAS.FACEBOOK}
                             target='_blank'
                         >
@@ -116,7 +126,7 @@ export const OnWelcome = (props: OnWelcomeEmailProps) => {
                         </Button>
 
                         <Button 
-                            style={onWelcomeSocialButton} 
+                            style={onBusinessApprovalSocialButton} 
                             href={SOCIAL_MEDIAS.YOUTUBE}
                             target='_blank'
                         >
@@ -128,7 +138,7 @@ export const OnWelcome = (props: OnWelcomeEmailProps) => {
                         </Button>
                         
                         <Button 
-                            style={onWelcomeSocialButton} 
+                            style={onBusinessApprovalSocialButton} 
                             href={SOCIAL_MEDIAS.LINKEDIN}
                             target='_blank'
                         >
@@ -140,7 +150,7 @@ export const OnWelcome = (props: OnWelcomeEmailProps) => {
                         </Button>
 
                         <Button 
-                            style={onWelcomeSocialButton} 
+                            style={onBusinessApprovalSocialButton} 
                             href={SOCIAL_MEDIAS.INSTAGRAM}
                             target='_blank'
                         >
@@ -152,7 +162,7 @@ export const OnWelcome = (props: OnWelcomeEmailProps) => {
                         </Button>
                     </Row>
 
-                    <Text style={onWelcomeFooterCopyright}>
+                    <Text style={onBusinessApprovalFooterCopyright}>
                         {new Date().getFullYear() + ' ' + Translation('mail-footer-copyright')}
                     </Text>
                 </Container>
@@ -161,4 +171,4 @@ export const OnWelcome = (props: OnWelcomeEmailProps) => {
     )
 }
 
-export default OnWelcome
+export default OnBusinessApproval

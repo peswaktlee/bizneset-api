@@ -87,10 +87,24 @@ const UserStructure: Schema<UserInterface> = new Schema(
             type: Boolean,
             required: false,
             unique: false,
-            default: false
+            default: true
         },
         Notifications: {
+            GeneralUpdates: {
+                type: Boolean,
+                required: false,
+                unique: false,
+                default: true
+            },
             OnBusinessStatuses: {
+                type: Boolean,
+                required: false,
+                unique: false,
+                default: true
+            }
+        },
+        Mails: {
+            OnWelcome: {
                 type: Boolean,
                 required: false,
                 unique: false,

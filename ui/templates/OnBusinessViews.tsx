@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import type { OnWelcomeEmailProps } from '@/ts'
+import type { OnBusinessViewsProps } from '@/ts'
 
 import { Translation } from '@/helpers/generals'
 import { ASSETS, SOCIAL_MEDIAS } from '@/data/constants'
@@ -21,27 +21,34 @@ import {
 } from '@react-email/components'
 
 import {
-    onWelcomeMain,
-    onWelcomeContainer,
-    onWelcomeBox,
-    onWelcomeParagraph,
-    onWelcomeLogo,
-    onWelcomeTitle,
-    onWelcomeFooter,
-    onWelcomeFooterCopyright,
-    onWelcomeGradientBreakline,
-    onWelcomeSocialButton,
-    onWelcomeSocialsContainer,
-    onWelcomeButtonLogo,
-    onWelcomeParagraphBold,
-    onWelcomeEndTextStyle
+    onWelcomeViewMain,
+    onWelcomeViewContainer,
+    onWelcomeViewBox,
+    onWelcomeViewParagraph,
+    onWelcomeViewLogo,
+    onWelcomeViewTitle,
+    onWelcomeViewFooter,
+    onWelcomeViewFooterCopyright,
+    onWelcomeViewGradientBreakline,
+    onWelcomeViewSocialButton,
+    onWelcomeViewSocialsContainer,
+    onWelcomeViewButtonLogo,
+    onWelcomeViewParagraphBold,
+    onWelcomeViewEndTextStyle,
+    onWelcomeViewButton
 } from '@/ui/styles'
 
 const siteUrl = FULL_APP_HOST
 const logoUrl = ASSETS.LOGO_BLACK_FULL
 
-export const OnWelcome = (props: OnWelcomeEmailProps) => {
-    const { subject, userName } = props
+export const OnBusinessViews = (props: OnBusinessViewsProps) => {
+    const { 
+        subject, 
+        userName, 
+        businessName, 
+        views,
+        businessLink
+    } = props
 
     return (
         <Html>
@@ -60,51 +67,55 @@ export const OnWelcome = (props: OnWelcomeEmailProps) => {
                 {subject}
             </Preview>
 
-            <Body style={onWelcomeMain}>
-                <Container style={onWelcomeContainer}>
-                    <Section style={onWelcomeBox}>
+            <Body style={onWelcomeViewMain}>
+                <Container style={onWelcomeViewContainer}>
+                    <Section style={onWelcomeViewBox}>
                         <Button 
-                            style={onWelcomeButtonLogo} 
+                            style={onWelcomeViewButtonLogo} 
                             href={siteUrl} 
                             target='_blank'
                         >
                             <Img
                                 width='118'
                                 src={logoUrl}
-                                style={onWelcomeLogo}
+                                style={onWelcomeViewLogo}
                             />
                         </Button>
                         
-                        <Section style={onWelcomeGradientBreakline} />
+                        <Section style={onWelcomeViewGradientBreakline} />
 
-                        <Text style={onWelcomeTitle}>
-                            {Translation('salam')}, {userName || Translation('user')} 👋
+                        <Text style={onWelcomeViewTitle}>
+                            {userName || Translation('user')}, {Translation('your-business')} {businessName ? `"${businessName}"` : ''} {Translation('has-reached')} {views ? views : Translation('much')} {Translation('visits')} 👀🎉
                         </Text>
                     
-                        <Text style={onWelcomeParagraph}>
-                            {Translation('on-welcome-paragraph')}
+                        <Text style={onWelcomeViewParagraph}>
+                            {Translation('on-business-views-paragraph')}
                         </Text>
 
-                        <Text style={onWelcomeParagraph}>
-                            {Translation('on-welcome-paragraph-2')}
-                        </Text>
+                        <Button 
+                            style={onWelcomeViewButton} 
+                            href={businessLink} 
+                            target='_blank'
+                        >
+                            {Translation('view-business')}
+                        </Button>
 
-                        <Section style={onWelcomeEndTextStyle}>
-                            <Text style={onWelcomeParagraph}>
+                        <Section style={onWelcomeViewEndTextStyle}>
+                            <Text style={onWelcomeViewParagraph}>
                                 {Translation('thank-you')},
                             </Text>
-
-                            <Text style={onWelcomeParagraphBold}>
+                        
+                            <Text style={onWelcomeViewParagraphBold}>
                                 {Translation('our-team')}
                             </Text>
                         </Section>
                     </Section>
                 </Container>
 
-                <Container style={onWelcomeFooter}>
-                    <Row align='center' style={onWelcomeSocialsContainer}>
+                <Container style={onWelcomeViewFooter}>
+                    <Row align='center' style={onWelcomeViewSocialsContainer}>
                         <Button 
-                            style={onWelcomeSocialButton} 
+                            style={onWelcomeViewSocialButton} 
                             href={SOCIAL_MEDIAS.FACEBOOK}
                             target='_blank'
                         >
@@ -116,7 +127,7 @@ export const OnWelcome = (props: OnWelcomeEmailProps) => {
                         </Button>
 
                         <Button 
-                            style={onWelcomeSocialButton} 
+                            style={onWelcomeViewSocialButton} 
                             href={SOCIAL_MEDIAS.YOUTUBE}
                             target='_blank'
                         >
@@ -128,7 +139,7 @@ export const OnWelcome = (props: OnWelcomeEmailProps) => {
                         </Button>
                         
                         <Button 
-                            style={onWelcomeSocialButton} 
+                            style={onWelcomeViewSocialButton} 
                             href={SOCIAL_MEDIAS.LINKEDIN}
                             target='_blank'
                         >
@@ -140,7 +151,7 @@ export const OnWelcome = (props: OnWelcomeEmailProps) => {
                         </Button>
 
                         <Button 
-                            style={onWelcomeSocialButton} 
+                            style={onWelcomeViewSocialButton} 
                             href={SOCIAL_MEDIAS.INSTAGRAM}
                             target='_blank'
                         >
@@ -152,7 +163,7 @@ export const OnWelcome = (props: OnWelcomeEmailProps) => {
                         </Button>
                     </Row>
 
-                    <Text style={onWelcomeFooterCopyright}>
+                    <Text style={onWelcomeViewFooterCopyright}>
                         {new Date().getFullYear() + ' ' + Translation('mail-footer-copyright')}
                     </Text>
                 </Container>
@@ -161,4 +172,4 @@ export const OnWelcome = (props: OnWelcomeEmailProps) => {
     )
 }
 
-export default OnWelcome
+export default OnBusinessViews
