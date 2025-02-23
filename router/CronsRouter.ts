@@ -10,14 +10,14 @@ import PerformCleanup from '@/actions/crons/PerformCleanup'
 const CronsRouter = (): HonoBase => {
     const router = new Hono()
 
-    router.post(
+    router.get(
         CRONS_ROUTES.GENERATE_BACKUP, 
         Connect, 
         KeyMiddleware,
         GenerateBackup
     )
 
-    router.post(
+    router.get(
         CRONS_ROUTES.PERFORM_CLEANUP, 
         Connect, 
         KeyMiddleware,
