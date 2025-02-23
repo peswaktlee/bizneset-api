@@ -12,7 +12,7 @@ const SavesRouter = (): HonoBase => {
     router.post(
         SAVES_ROUTES.HANDLE_SAVE, 
         Connect, 
-        OptionalAuthMiddleware,
+        AuthMiddleware,
         HandleSave
     )
 

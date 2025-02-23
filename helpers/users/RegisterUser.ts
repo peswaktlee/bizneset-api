@@ -4,8 +4,12 @@ import { UserModel } from '@/data/models'
 import { HttpResponder } from '@/helpers/http'
 import { CurrentTimestamp } from '@/helpers/dates'
 import { DeleteFirebaseAccount } from '@/helpers/libs/firebase'
-import { Console } from '@/helpers/logs'
-import { AddContact } from '@/helpers/libs/resend'
+import { Analytics, Console } from '@/helpers/logs'
+import { AddContact, SendEmail } from '@/helpers/libs/resend'
+import { AutoUpdateAvatar } from '@/actions/users'
+import { Translation } from '@/helpers/generals'
+import { OnWelcome } from '@/ui/templates'
+import { RESEND_FROM_EMAIL } from '@/data/constants'
 
 const RegisterUser = async (props: RegisterUserFunctionProps) => {
     const {
@@ -32,12 +36,42 @@ const RegisterUser = async (props: RegisterUserFunctionProps) => {
         const initial_user = new UserModel({
             ...user_inital_data,
             Last_Active_At: CurrentTimestamp(),
+            Last_Avatar_Update_At: CurrentTimestamp(),
             Created_At: CurrentTimestamp(),
             Updated_At: CurrentTimestamp()
         })
 
         await initial_user.save()
+
+        setImmediate(async () => {
+            Analytics.Increase([
+                'TotalUsers'
+            ])
+        })
+
+        await AutoUpdateAvatar(avatar, uid)
         await AddContact(initial_user)
+
+        const subject = `${user_inital_data?.Name}, ${Translation('welcome-mail-subject')}`
+
+        const onWelcomeStatus = await SendEmail({
+            subject,
+            from: `${Translation('app-name')} <${RESEND_FROM_EMAIL}>`,
+            toEmail: initial_user.Email,
+            template: OnWelcome({
+                subject,
+                userName: user_inital_data?.Name || ''
+            })
+        })
+    
+        if (onWelcomeStatus) {
+            initial_user.Mails.OnWelcome = true
+            initial_user.Updated_At = CurrentTimestamp()
+
+            await initial_user.save()
+        }
+
+        else Console.Error('RegisterUser', 'on_welcome_email_was_not_sent')
 
         return await HttpResponder({
             c,

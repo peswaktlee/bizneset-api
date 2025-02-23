@@ -1,68 +1,108 @@
 import type { Context } from 'hono'
 
 import { DecodeBody, HttpResponder } from '@/helpers/http'
-import { Console } from '@/helpers/logs'
-import { SaveModel } from '@/data/models'
+import { Analytics, Console } from '@/helpers/logs'
+import { BusinessModel, SaveModel } from '@/data/models'
 import { CurrentTimestamp } from '@/helpers/dates'
-import { CONTEXT_KEYS } from '@/data/constants'
+import { BUSINESS_STATUSES, CONTEXT_KEYS } from '@/data/constants'
 
 const HandleSave = async (c: Context) => {
     try {
         const user = c.get(CONTEXT_KEYS.USER)
-        
+
         if (user) {
             const { businessId } = await DecodeBody(c)
 
-            const saveExists = await SaveModel.findOne({
-                User: user?._id,
-                Business: businessId
+            const business = await BusinessModel.findOne({ 
+                _id: businessId, 
+                Status: BUSINESS_STATUSES.APPROVED 
             })
 
-            if (saveExists) {
-                await SaveModel.deleteOne({
+            if (business) {
+                const saveExists = await SaveModel.findOne({
                     User: user?._id,
                     Business: businessId
                 })
+    
+                if (saveExists) {
+                    await SaveModel.deleteOne({
+                        User: user?._id,
+                        Business: businessId
+                    })
 
-                user.Saves -= 1
-                await user.save()
+                    business.Saves -= 1
+                    business.Updated_At = CurrentTimestamp()
 
-                return await HttpResponder({
-                    c,
-                    success: true,
-                    code: 200,
-                    message: 'business-was-deleted-from-saves-successfully',
-                    data: {
-                        isRemoved: true,
-                        isAdded: false
-                    }
-                })
+                    await business.save()
+    
+                    user.Saves -= 1
+                    user.Updated_At = CurrentTimestamp()
 
+                    await user.save()
+
+                    setImmediate(async () => {
+                        Analytics.Decrease([
+                            'TotalBusinessSaves'
+                        ])
+                    })
+    
+                    return await HttpResponder({
+                        c,
+                        success: true,
+                        code: 200,
+                        message: 'business-was-deleted-from-saves-successfully',
+                        data: {
+                            isRemoved: true,
+                            isAdded: false
+                        }
+                    })
+                }
+    
+                else {
+                    const instance = new SaveModel({
+                        User: user?._id?.toString(),
+                        Business: businessId,
+                        Saved_At: CurrentTimestamp()
+                    })
+    
+                    await instance.save()
+
+                    business.Saves += 1
+                    business.Updated_At = CurrentTimestamp()
+
+                    await business.save()
+
+                    user.Saves += 1
+                    user.Updated_At = CurrentTimestamp()
+
+                    await user.save()
+                    
+                    setImmediate(async () => {
+                        Analytics.Increase([
+                            'TotalBusinessSaves'
+                        ])
+                    })
+    
+                    return await HttpResponder({
+                        c,
+                        success: true,
+                        code: 200,
+                        message: 'business-was-saved-successfully',
+                        data: {
+                            isRemoved: false,
+                            isAdded: true
+                        }
+                    })
+                }
             }
 
-            else {
-                const instance = new SaveModel({
-                    User: user?._id,
-                    Business: businessId,
-                    Saved_At: CurrentTimestamp()
-                })
-
-                await instance.save()
-
-                user.Saves += 1
-                await user.save()
-
-                return await HttpResponder({
-                    c,
-                    success: true,
-                    code: 200,
-                    message: 'business-was-saved-successfully',
-                    data: {
-                        isRemoved: false,
-                        isAdded: true
-                    }
-                })
-            }
+            else return await HttpResponder({
+                c,
+                success: false,
+                code: 404,
+                message: 'business-not-found-so-it-cannot-be-saved',
+                data: null
+            })
         }
 
         else return await HttpResponder({

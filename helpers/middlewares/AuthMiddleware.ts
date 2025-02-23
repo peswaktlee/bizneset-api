@@ -4,7 +4,7 @@ import { Console } from '@/helpers/logs'
 import { HttpResponder } from '@/helpers/http'
 import { UserModel } from '@/data/models'
 import { Firebase } from '@/helpers/libs/firebase'
-import { CONTEXT_KEYS, HEADER_KEYS } from '@/data/constants'
+import { CONTEXT_KEYS, HEADER_KEYS, USER_ROLES } from '@/data/constants'
 
 const AuthMiddleware = async (c: Context, next: Next) => {
     const admin = await Firebase()
@@ -24,12 +24,13 @@ const AuthMiddleware = async (c: Context, next: Next) => {
             const decodedToken = await admin.auth().verifyIdToken(token)
 
             if (decodedToken?.uid) {
-                const user = await UserModel
-                    .findOne({ Uid: decodedToken.uid })
-                    .lean()
+                const user = await UserModel.findOne({ Uid: decodedToken.uid })
 
                 if (user) {
                     c.set(CONTEXT_KEYS.USER, user)
+                    
+                    if (user?.Role === USER_ROLES.ADMIN) c.set(CONTEXT_KEYS.ADMIN, user)
+
                     await next()
                 }
 

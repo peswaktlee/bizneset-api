@@ -7,7 +7,7 @@ import { MODELS } from '@/data/constants'
 let SaveModel: Model<SaveInterface>
 
 try {
-    SaveModel = model<SaveInterface>(MODELS.USER)
+    SaveModel = model<SaveInterface>(MODELS.USER_SAVE)
 } 
 
 catch {

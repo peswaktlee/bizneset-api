@@ -57,6 +57,12 @@ const UserStructure: Schema<UserInterface> = new Schema(
             unique: false,
             default: 0
         },
+        DeletedBusinesses: {
+            type: Number,
+            required: false,
+            unique: false,
+            default: 0
+        },
         Saves: {
             type: Number,
             required: false,
@@ -77,6 +83,34 @@ const UserStructure: Schema<UserInterface> = new Schema(
             ref: MODELS.CITY,
             default: null
         },
+        HasPendingBusinessSubmission: {
+            type: Boolean,
+            required: false,
+            unique: false,
+            default: true
+        },
+        Notifications: {
+            GeneralUpdates: {
+                type: Boolean,
+                required: false,
+                unique: false,
+                default: true
+            },
+            OnBusinessStatuses: {
+                type: Boolean,
+                required: false,
+                unique: false,
+                default: true
+            }
+        },
+        Mails: {
+            OnWelcome: {
+                type: Boolean,
+                required: false,
+                unique: false,
+                default: true
+            }
+        },
         Last_Active_At: {
             type: Date,
             required: true,
@@ -92,6 +126,11 @@ const UserStructure: Schema<UserInterface> = new Schema(
             required: false,
             unique: false,
             default: null
+        },
+        Last_Avatar_Update_At: {
+            type: Date,
+            required: true,
+            unique: false
         }
     },
     {

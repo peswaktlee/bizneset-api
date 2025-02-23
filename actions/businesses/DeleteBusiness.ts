@@ -4,8 +4,8 @@ import { BusinessModel } from '@/data/models'
 import { DecodeBody, HttpResponder } from '@/helpers/http'
 import { ObjectId } from '@/helpers/libs/mongo'
 import { Console } from '@/helpers/logs'
-import { CurrentTimestamp } from '@/helpers/dates'
-import { BUSINESS_STATUSES, CONTEXT_KEYS } from '@/data/constants'
+import { HandleDeletion } from '@/helpers/businesses'
+import { CONTEXT_KEYS } from '@/data/constants'
 
 const DeleteBusiness = async (c: Context) => {
     try {
@@ -30,27 +30,22 @@ const DeleteBusiness = async (c: Context) => {
             })
 
             else {
-                // @ts-ignore
-                business.Status = BUSINESS_STATUSES.DELETED
-                
-                // @ts-ignore
-                business.Updated_At = CurrentTimestamp()
+                const data = await HandleDeletion(business, user)
 
-                await business.save()
-
-                user.Businesses = user.Businesses - 1
-                user.DeletedBusinesses = user.DeletedBusinesses + 1
-
-                user.Updated_At = CurrentTimestamp()
-
-                await user.save()
-
-                return await HttpResponder({
+                if (data) return await HttpResponder({
                     c,
                     success: true,
                     code: 200,
                     message: 'business-was-deleted-successfully',
-                    data: null
+                    data: data
+                })
+
+                else return await HttpResponder({
+                    c,
+                    success: false,
+                    code: 500,
+                    data: null,
+                    message: 'something-went-wrong-while-deleting-the-business'
                 })
             }
         }

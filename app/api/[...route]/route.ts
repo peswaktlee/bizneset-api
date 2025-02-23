@@ -10,7 +10,7 @@ import {
     CategoriesRouter, 
     CitiesRouter, 
     CountriesRouter, 
-    LogsRouter, 
+    GeneralsRouter, 
     SavesRouter, 
     UsersRouter 
 } from '@/router'
@@ -28,8 +28,8 @@ ApplyGlobalMiddlewares(GROUP_ROUTES.COUNTRIES, CountriesRouter())
 ApplyGlobalMiddlewares(GROUP_ROUTES.CITIES, CitiesRouter())
 ApplyGlobalMiddlewares(GROUP_ROUTES.USERS, UsersRouter())
 ApplyGlobalMiddlewares(GROUP_ROUTES.SAVES, SavesRouter())
-
-ApplyGlobalMiddlewares(GROUP_ROUTES.LOGS, LogsRouter())
+ApplyGlobalMiddlewares(GROUP_ROUTES.CRONS, SavesRouter())
+ApplyGlobalMiddlewares(GROUP_ROUTES.GENERALS, GeneralsRouter())
 
 app.notFound(CatchAll)
 

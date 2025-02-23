@@ -160,3 +160,37 @@ export type RegisterUserFunctionProps = {
     phone: string,
     avatar: string
 }
+
+export type UploadToBucketSizeType = {
+    status: boolean
+    path: string | null
+    size: number
+}
+
+export type OnWelcomeEmailProps = {
+    subject: string
+    userName: string
+}
+
+export type OnBusinessViewsProps = {
+    subject: string
+    views: string
+    userName: string
+    businessName: string
+    businessLink: string
+}
+
+export type OnBusinessApprovalProps = {
+    subject: string
+    userName: string
+    businessName: string 
+    businessLink: string
+}
+
+export type OnBusinessRejectionProps = {
+    subject: string
+    userName: string
+    businessName: string 
+    businessLink: string
+    reasonOfRejection: string
+}
