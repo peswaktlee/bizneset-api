@@ -22,7 +22,7 @@ const PerformCleanup = async (c: Context) => {
                 const { days } = CalculateDifference(Delete_At)
 
                 if (days >= DELETE_REJECTED_AFTER_DAYS) {
-                    const user = UserModel.findOne({ _id: business.User })
+                    const user = await UserModel.findOne({ _id: business.User })
 
                     if (user) {
                         // @ts-ignore

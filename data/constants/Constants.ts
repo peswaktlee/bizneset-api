@@ -15,8 +15,6 @@ export const CDN_BUCKETS = {
 export const MODELS = {
     BUSINESS: 'Business',
     CATEGORY: 'Category',
-    CITY: 'City',
-    COUNTRY: 'Country',
     LOG: 'Log',
     USER: 'User',
     USER_SAVE: 'User-Save',
@@ -33,8 +31,6 @@ export const LOG_TYPES = {
 export const GROUP_ROUTES = {
     BUSINESSES: 'businesses',
     CATEGORIES: 'categories',
-    CITIES: 'cities',
-    COUNTRIES: 'countries',
     GENERALS: 'generals',
     USERS: 'users',
     CRONS: 'crons',
@@ -89,16 +85,6 @@ export const USERS_ROUTES = {
     UPDATE_AVATAR: '/avatar-user',
     UPDATE_USER: '/update-user',
     CLOSE_ACCOUNT: '/close-account'
-}
-
-export const CITIES_ROUTES = {
-    CREATE_CITY: '/create-city',
-    LIST_CITIES: '/list-cities'
-}
-
-export const COUNTRIES_ROUTES = {
-    CREATE_COUNTRY: '/create-country',
-    LIST_COUNTRIES: '/list-countries'
 }
 
 export const SAVES_ROUTES = {

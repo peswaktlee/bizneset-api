@@ -12,8 +12,6 @@ import {
     BackupModel,
     BusinessModel,
     CategoryModel,
-    CityModel,
-    CountryModel,
     LogModel,
     SaveModel,
     UserModel
@@ -44,8 +42,6 @@ const GenerateBackup = async (c: Context) => {
             const backups = await BackupModel.find().lean()
             const businesses = await BusinessModel.find().lean()
             const categories = await CategoryModel.find().lean()
-            const cities = await CityModel.find().lean()
-            const countries = await CountryModel.find().lean()
             const logs = await LogModel.find().lean()
             const saves = await SaveModel.find().lean()
             const users = await UserModel.find().lean()
@@ -56,8 +52,6 @@ const GenerateBackup = async (c: Context) => {
             const { size: sBackups, path: pBackups } = await Backup(FormatModelBackupName(MODELS.BACKUP), date, backups)
             const { size: sBusinesses, path: pBusinesses } = await Backup(FormatModelBackupName(MODELS.BUSINESS), date, businesses)
             const { size: sCategories, path: pCategories } = await Backup(FormatModelBackupName(MODELS.CATEGORY), date, categories)
-            const { size: sCities, path: pCities } = await Backup(FormatModelBackupName(MODELS.CITY), date, cities)
-            const { size: sCountries, path: pCountries } = await Backup(FormatModelBackupName(MODELS.COUNTRY), date, countries)
             const { size: sLogs, path: pLogs } = await Backup(FormatModelBackupName(MODELS.LOG), date, logs)
             const { size: sSaves, path: pSaves } = await Backup(FormatModelBackupName(MODELS.USER_SAVE), date, saves)
             const { size: sUsers, path: pUsers } = await Backup(FormatModelBackupName(MODELS.USER), date, users)
@@ -70,8 +64,6 @@ const GenerateBackup = async (c: Context) => {
                 sBackups +
                 sBusinesses +
                 sCategories +
-                sCities +
-                sCountries +
                 sLogs +
                 sSaves +
                 sUsers +
@@ -81,8 +73,6 @@ const GenerateBackup = async (c: Context) => {
                 backups.length +
                 businesses.length +
                 categories.length +
-                cities.length +
-                countries.length +
                 logs.length +
                 saves.length +
                 users.length +
@@ -96,8 +86,6 @@ const GenerateBackup = async (c: Context) => {
                 pBackups,
                 pBusinesses,
                 pCategories,
-                pCities,
-                pCountries,
                 pLogs,
                 pSaves,
                 pUsers,
