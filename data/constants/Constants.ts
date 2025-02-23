@@ -1,4 +1,6 @@
-import { FULL_HOST } from '@/data/constants/Envs'
+import { CLOUDFLARE_CDN_DOMAIN, FULL_HOST, LINKS_URL } from '@/data/constants/Envs'
+
+export const DELETE_REJECTED_AFTER_DAYS = 30
 
 export const USER_ROLES = {
     ADMIN: 'admin',
@@ -6,7 +8,8 @@ export const USER_ROLES = {
 }
 
 export const CDN_BUCKETS = {
-    AVATARS: 'avatars'
+    AVATARS: 'avatars',
+    ASSETS: 'assets'
 }
 
 export const MODELS = {
@@ -69,7 +72,9 @@ export const CONTEXT_KEYS = {
 
 export const CATEGORIES_ROUTES = {
     CREATE_CATEGORY: '/create-category',
-    LIST_CATEGORIES: '/list-categories'
+    LIST_CATEGORIES: '/list-categories',
+    LIST_STATIC_CATEGORIES: '/list-static-categories',
+    LIST_STATIC_CATEGORY: '/list-static-category'
 }
 
 export const HEADER_KEYS = {
@@ -102,7 +107,8 @@ export const SAVES_ROUTES = {
 }
 
 export const CRONS_ROUTES = {
-    GENERATE_BACKUP: '/generate-backup'
+    GENERATE_BACKUP: '/generate-backup',
+    PERFORM_CLEANUP: '/perform-cleanup'
 }
 
 export const BUSINESSES_ROUTES = {
@@ -110,16 +116,20 @@ export const BUSINESSES_ROUTES = {
     DELETE_BUSINESS: '/delete-business',
     LIST_BUSINESSES: '/list-businesses',
     VIEW_BUSINESS: '/view-business',
+    VIEW_BUSINESS_EDIT: '/view-business-edit',
     LIST_USER_BUSINESSES: '/list-user-businesses',
     LIST_SIMILAR_BUSINESSES: '/list-similar-businesses',
     APPROVE_BUSINESS: '/approve-business',
     REJECT_BUSINESS: '/reject-business',
-    LIST_ADMIN_BUSINESSES: '/list-admin-businesses'
+    LIST_ADMIN_BUSINESSES: '/list-admin-businesses',
+    LIST_STATIC_BUSINESSES: '/list-static-businesses',
+    LIST_STATIC_BUSINESS: '/list-static-business'
 }
 
 export const FILE_EXTENSIONS = {
     WEBP: 'webp',
-    JSON: 'json'
+    JSON: 'json',
+    PNG: 'png'
 }
 
 export const FILE_TYPES = {
@@ -179,3 +189,32 @@ export const SIMILAR_BUSINESSES_SORTS: Array<Record<string, number>> = [
     { Updated_At: 1 },
     { Updated_At: -1 }
 ]
+
+export const SOCIAL_MEDIAS = {
+    FACEBOOK: `${LINKS_URL}/bizneset-facebook`,
+    INSTAGRAM: `${LINKS_URL}/bizneset-instagram`,
+    LINKEDIN: `${LINKS_URL}/bizneset-linkedin`,
+    YOUTUBE: `${LINKS_URL}/bizneset-youtube`
+}
+
+export const ASSETS = {
+    LOGO_BLACK_FULL: `${CLOUDFLARE_CDN_DOMAIN}/${CDN_BUCKETS.ASSETS}/bizneset-logo-dark.${FILE_EXTENSIONS.PNG}`,
+    SOCIAL_MEDIA_ICON_LINKEDIN: `${CLOUDFLARE_CDN_DOMAIN}/${CDN_BUCKETS.ASSETS}/linkedin-social-icon.${FILE_EXTENSIONS.PNG}`,
+    SOCIAL_MEDIA_ICON_YOUTUBE: `${CLOUDFLARE_CDN_DOMAIN}/${CDN_BUCKETS.ASSETS}/youtube-social-icon.${FILE_EXTENSIONS.PNG}`,
+    SOCIAL_MEDIA_ICON_INSTAGRAM: `${CLOUDFLARE_CDN_DOMAIN}/${CDN_BUCKETS.ASSETS}/instagram-social-icon.${FILE_EXTENSIONS.PNG}`,
+    SOCIAL_MEDIA_ICON_FACEBOOK: `${CLOUDFLARE_CDN_DOMAIN}/${CDN_BUCKETS.ASSETS}/facebook-social-icon.${FILE_EXTENSIONS.PNG}`
+}
+
+export const VIEWS_FOR_EMAIL = {
+    K: 1000,
+    KK: 10000,
+    KKK: 100000,
+    KKKK: 1000000
+}
+
+export const VIEWS_WITH_COMMA_EMAIL = {
+    K: '1,000',
+    KK: '10,000',
+    KKK: '100,100',
+    KKKK: '1,000,000'
+}

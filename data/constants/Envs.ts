@@ -2,11 +2,12 @@
 export const HOST: string = process.env.HOST as string
 export const PORT: string = process.env.PORT as string
 export const FULL_HOST: string = process.env.FULL_HOST as string
+export const FULL_APP_HOST: string = process.env.FULL_APP_HOST as string
+export const LINKS_URL: string = process.env.LINKS_URL as string
 export const ENV: string = process.env.ENV as string
 export const ORIGINS: string = process.env.ORIGINS as string
 export const SECRET_KEY: string = process.env.SECRET_KEY as string
 export const DECRYPT_KEY: string = process.env.DECRYPT_KEY as string
-export const PUBLIC_SITE: string = process.env.NEXT_PUBLIC_PUBLIC_SITE as string
 
 // Mongo
 export const MONGO_CLUSTER: string = process.env.MONGO_CLUSTER as string
@@ -22,10 +23,12 @@ export const CLOUDFLARE_S3_EU_ENDPOINT: string = process.env.CLOUDFLARE_S3_EU_EN
 export const CLOUDFLARE_S3_US_ENDPOINT: string = process.env.CLOUDFLARE_S3_US_ENDPOINT as string
 export const CLOUDFLARE_CDN_BUCKET: string = process.env.CLOUDFLARE_CDN_BUCKET as string
 export const CLOUDFLARE_BACKUP_BUCKET: string = process.env.CLOUDFLARE_BACKUP_BUCKET as string
+export const CLOUDFLARE_CDN_DOMAIN: string = process.env.CLOUDFLARE_CDN_DOMAIN as string
 
 // Resend
 export const RESEND_API_SECRET_KEY: string = process.env.RESEND_API_SECRET_KEY as string
 export const RESEND_GENERAL_AUDIENCE_ID: string = process.env.RESEND_GENERAL_AUDIENCE_ID as string
+export const RESEND_FROM_EMAIL: string = process.env.RESEND_FROM_EMAIL as string
 
 // Firebase Admin
 export const FB_ADMIN_TYPE: string = process.env.FB_ADMIN_TYPE as string

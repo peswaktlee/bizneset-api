@@ -57,12 +57,16 @@ export interface UserInterface {
     City: CityInterface | null
     HasPendingBusinessSubmission: boolean
     Notifications: {
+        GeneralUpdates: boolean
         OnBusinessStatuses: boolean
     }
     Last_Active_At: Date
     Created_At: Date
     Updated_At: Date | null
     Last_Avatar_Update_At: Date | null
+    Mails: {
+        OnWelcome: boolean
+    }
 }
 
 export interface SaveInterface {
@@ -148,7 +152,16 @@ export interface BusinessInterface {
     Visits: number
     Reach: number
     Saves: number
+    Mails: {
+        OnApprovalMail: boolean
+        OnRejectionMail: boolean
+        OnKViewsMail: boolean
+        OnKKViewsMail: boolean
+        OnKKKViewsMail: boolean
+        OnKKKKViewsMail: boolean
+    }
     Created_At: Date
+    Delete_At: Date | null
     Updated_At: Date | null
 }
 

@@ -3,24 +3,14 @@ import type { Context } from 'hono'
 import { Console } from '@/helpers/logs'
 import { HttpResponder } from '@/helpers/http'
 import { GenerateBackup } from '@/helpers/api'
-import { CONTEXT_KEYS } from '@/data/constants'
 
-const CreateBackupCron = async (c: Context) => {
+const CreateBackup = async (c: Context) => {
     try {
-        const admin = c.get(CONTEXT_KEYS.ADMIN)
-
-        if (admin) return await GenerateBackup(c)
-        else return await HttpResponder({
-            c,
-            success: false,
-            code: 500,
-            data: null,
-            message: 'user-was-not-found-or-the-user-has-no-permissions-to-generate-a-backup'
-        })
+        return await GenerateBackup(c)
     }
 
     catch (error) {
-        Console.Error('CreateBackupCron', error)
+        Console.Error('CreateBackup', error)
 
         return await HttpResponder({
             c,
@@ -32,4 +22,4 @@ const CreateBackupCron = async (c: Context) => {
     }
 }
 
-export default CreateBackupCron
+export default CreateBackup

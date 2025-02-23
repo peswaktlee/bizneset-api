@@ -10,14 +10,14 @@ const AutoUpdateAvatar = async (avatarUrl: string, userId: string): Promise<bool
         const blob = await fetchImage.blob()
     
         if (blob) {
-            const path = `${CDN_BUCKETS.AVATARS}/avatars/${userId}.${FILE_EXTENSIONS.WEBP}`
+            const path = `${CDN_BUCKETS.AVATARS}/${userId}.${FILE_EXTENSIONS.WEBP}`
             await DeleteFile(path, CLOUDFLARE_CDN_BUCKET)
 
             const blobToBuffer = await new Response(blob).arrayBuffer()
             
             const base64webp = await sharp(blobToBuffer)
+                .resize(250, 250)
                 .webp({ quality: 100 })
-                .resize(100, 100)
                 .toBuffer()
 
             if (base64webp) {

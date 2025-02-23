@@ -1,4 +1,4 @@
-import GenerateBackup from '@/helpers/api/GenerateBackup'
+import GenerateBackup from '@/actions/crons/GenerateBackup'
 
 export {
     GenerateBackup

@@ -31,7 +31,7 @@ const ListBusinesses = async (c: Context) => {
         if (category) filters['Category'] = ObjectId(category)
         if (city) filters['City'] = ObjectId(city)
         if (country) filters['Country'] = ObjectId(country)
-            
+
         const count = await BusinessModel.countDocuments(filters)
         const businesses = await BusinessModel
             .find(filters)

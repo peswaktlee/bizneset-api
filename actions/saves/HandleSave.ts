@@ -40,9 +40,11 @@ const HandleSave = async (c: Context) => {
 
                     await user.save()
 
-                    Analytics.Decrease([
-                        'TotalBusinessSaves'
-                    ])
+                    setImmediate(async () => {
+                        Analytics.Decrease([
+                            'TotalBusinessSaves'
+                        ])
+                    })
     
                     return await HttpResponder({
                         c,
@@ -74,10 +76,12 @@ const HandleSave = async (c: Context) => {
                     user.Updated_At = CurrentTimestamp()
 
                     await user.save()
-
-                    Analytics.Increase([
-                        'TotalBusinessSaves'
-                    ])
+                    
+                    setImmediate(async () => {
+                        Analytics.Increase([
+                            'TotalBusinessSaves'
+                        ])
+                    })
     
                     return await HttpResponder({
                         c,

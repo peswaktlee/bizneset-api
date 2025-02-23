@@ -5,6 +5,7 @@ import sharp from 'sharp'
 import { DecodeBody, HttpResponder } from '@/helpers/http'
 import { Console } from '@/helpers/logs'
 import { DeleteFile, UploadToBucket } from '@/helpers/libs/cloudflare'
+import { CurrentTimestamp } from '@/helpers/dates'
 
 import { 
     CLOUDFLARE_BUCKETS, 
@@ -32,7 +33,7 @@ const UpdateAvatar = async (c: Context) => {
     
                     const base64pro = await sharp(base64buffer)
                         .resize(250, 250)
-                        .webp({ quality: 50 })
+                        .webp({ quality: 100 })
                         .toBuffer()
     
                     const uploaded = await UploadToBucket({
@@ -45,13 +46,15 @@ const UpdateAvatar = async (c: Context) => {
     
                     if (uploaded) {
                         user.Avatar = path
+                        user.Updated_At = CurrentTimestamp()
+
                         await user.save()
 
                         return await HttpResponder({
                             c,
                             success: true,
                             message: 'avatar-was-updated-successfully',
-                            data: path,
+                            data: null,
                             code: 200
                         })
                     }
