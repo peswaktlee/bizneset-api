@@ -76,12 +76,20 @@ const HandleDeletion = async (business: BusinessInterface, user: UserInterface) 
         })
                 
         for (const path of GALLERY_NUMBER_ITEMS) {
-            const pathString = `${CLOUDFLARE_CDN_PATHS.BUSINESSES}/${business?._id}/${path}.${FILE_EXTENSIONS.WEBP}`
-            await DeleteFile(pathString, CLOUDFLARE_BUCKETS.CDN)
+            try {
+                const pathString = `${CLOUDFLARE_CDN_PATHS.BUSINESSES}/${business?._id}/${path}.${FILE_EXTENSIONS.WEBP}`
+                await DeleteFile(pathString, CLOUDFLARE_BUCKETS.CDN)
+            }
+
+            catch (_) {}
         }
 
-        const pathLogo = `${CLOUDFLARE_CDN_PATHS.BUSINESSES}/${business?._id}/logo.${FILE_EXTENSIONS.WEBP}`
-        await DeleteFile(pathLogo, CLOUDFLARE_BUCKETS.CDN)
+        try {
+            const pathLogo = `${CLOUDFLARE_CDN_PATHS.BUSINESSES}/${business?._id}/logo.${FILE_EXTENSIONS.WEBP}`
+            await DeleteFile(pathLogo, CLOUDFLARE_BUCKETS.CDN)
+        }
+
+        catch (_) {}
 
         return data
     }

@@ -1,18 +1,3 @@
-export const CityListSelector = {
-    Name: 1,
-    Posts: 1,
-    Users: 1,
-    Country: 1
-}
-
-export const CountryListSelector = {
-    Name: 1,
-    Posts: 1,
-    Users: 1,
-    Cities: 1,
-    Code: 1
-}
-
 export const CategoryListSelector = {
     Name: 1,
     Slug: 1,
