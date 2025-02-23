@@ -10,6 +10,7 @@ import {
     CategoriesRouter, 
     CitiesRouter, 
     CountriesRouter, 
+    CronsRouter, 
     GeneralsRouter, 
     SavesRouter, 
     UsersRouter 
@@ -28,7 +29,7 @@ ApplyGlobalMiddlewares(GROUP_ROUTES.COUNTRIES, CountriesRouter())
 ApplyGlobalMiddlewares(GROUP_ROUTES.CITIES, CitiesRouter())
 ApplyGlobalMiddlewares(GROUP_ROUTES.USERS, UsersRouter())
 ApplyGlobalMiddlewares(GROUP_ROUTES.SAVES, SavesRouter())
-ApplyGlobalMiddlewares(GROUP_ROUTES.CRONS, SavesRouter())
+ApplyGlobalMiddlewares(GROUP_ROUTES.CRONS, CronsRouter())
 ApplyGlobalMiddlewares(GROUP_ROUTES.GENERALS, GeneralsRouter())
 
 app.notFound(CatchAll)
