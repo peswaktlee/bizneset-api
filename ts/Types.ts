@@ -1,5 +1,5 @@
 import type { CSSProperties, ReactNode, MouseEvent, FC } from 'react'
-import type { CategoryInterface, CityInterface, CountryInterface } from '@/ts'
+import type { CategoryInterface } from '@/ts'
 import type { Context } from 'hono'
 import type { StatusCode } from 'hono/utils/http-status'
 import type { METHODS } from 'http'
@@ -93,8 +93,6 @@ export type UserDropdownListItemType = {
 
 export type StatesType = {
     CATEGORIES: null | Array<CategoryInterface>
-    CITIES: null | Array<CityInterface>
-    COUNTRIES: null | Array<CountryInterface>
 }
 
 export type ValidationReturnType = {

@@ -14,9 +14,7 @@ const ListBusinesses = async (c: Context) => {
         const { 
             offset,
             term,
-            category,
-            city,
-            country
+            category
         } = await DecodeBody(c)
 
         const filters: Record<string, unknown> = {
@@ -29,8 +27,6 @@ const ListBusinesses = async (c: Context) => {
         }
 
         if (category) filters['Category'] = ObjectId(category)
-        if (city) filters['City'] = ObjectId(city)
-        if (country) filters['Country'] = ObjectId(country)
 
         const count = await BusinessModel.countDocuments(filters)
         const businesses = await BusinessModel

@@ -8,8 +8,6 @@ import { GROUP_ROUTES } from '@/data/constants'
 import { 
     BusinessesRouter, 
     CategoriesRouter, 
-    CitiesRouter, 
-    CountriesRouter, 
     CronsRouter, 
     GeneralsRouter, 
     SavesRouter, 
@@ -25,8 +23,6 @@ const ApplyGlobalMiddlewares = (route: string, handler: Hono<Env, {}, '/'>) => {
 
 ApplyGlobalMiddlewares(GROUP_ROUTES.BUSINESSES, BusinessesRouter())
 ApplyGlobalMiddlewares(GROUP_ROUTES.CATEGORIES, CategoriesRouter())
-ApplyGlobalMiddlewares(GROUP_ROUTES.COUNTRIES, CountriesRouter())
-ApplyGlobalMiddlewares(GROUP_ROUTES.CITIES, CitiesRouter())
 ApplyGlobalMiddlewares(GROUP_ROUTES.USERS, UsersRouter())
 ApplyGlobalMiddlewares(GROUP_ROUTES.SAVES, SavesRouter())
 ApplyGlobalMiddlewares(GROUP_ROUTES.CRONS, CronsRouter())

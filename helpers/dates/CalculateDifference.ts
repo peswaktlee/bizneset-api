@@ -10,7 +10,7 @@ const CalculateDifference = (startTimestamp: Date, endTimestamp?: Date) => {
     const seconds = duration.asSeconds()
     const minutes = duration.asMinutes()
     const hours = duration.asHours()
-    const days = duration.asDays()
+    const days = Math.floor(duration.asDays())
 
     return { 
         seconds, 

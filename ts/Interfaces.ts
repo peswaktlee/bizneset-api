@@ -29,17 +29,6 @@ export interface RequestFunctionReturnProps {
     data: any
 }
 
-export interface CountryInterface {
-    _id: string
-    Name: string
-    Code: string
-    Posts: number
-    Users: number
-    Cities: number
-    Created_At: Date
-    Updated_At: Date
-}
-
 export interface UserInterface {
     _id: string
     Uid: string
@@ -53,8 +42,6 @@ export interface UserInterface {
     Businesses: number
     DeletedBusinesses: number
     Saves: number
-    Country: CountryInterface | null
-    City: CityInterface | null
     HasPendingBusinessSubmission: boolean
     Notifications: {
         GeneralUpdates: boolean
@@ -74,16 +61,6 @@ export interface SaveInterface {
     User: UserInterface
     Business: BusinessInterface
     Saved_At: Date
-}
-
-export interface CityInterface {
-    _id: string
-    Name: string
-    Country: CountryInterface
-    Users: number
-    Posts: number
-    Created_At: Date
-    Updated_At: Date | null
 }
 
 export interface LogInterface {

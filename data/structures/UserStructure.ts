@@ -69,20 +69,6 @@ const UserStructure: Schema<UserInterface> = new Schema(
             unique: false,
             default: 0
         },
-        Country: {
-            type: Schema.Types.ObjectId,
-            required: false,
-            unique: false,
-            ref: MODELS.COUNTRY,
-            default: null
-        },
-        City: {
-            type: Schema.Types.ObjectId,
-            required: false,
-            unique: false,
-            ref: MODELS.CITY,
-            default: null
-        },
         HasPendingBusinessSubmission: {
             type: Boolean,
             required: false,
