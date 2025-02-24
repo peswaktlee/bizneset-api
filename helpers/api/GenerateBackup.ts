@@ -5,7 +5,7 @@ import { Console } from '@/helpers/logs'
 import { FormatModelBackupName } from '@/helpers/generals'
 import { Backup } from '@/helpers/api'
 import { BackupDate, CurrentTimestamp } from '@/helpers/dates'
-import { MODELS } from '@/data/constants'
+import { MODELS_BACKUPS_NAMES } from '@/data/constants'
 
 import { 
     AnalyticModel,
@@ -26,7 +26,7 @@ const GenerateBackup = async (c: Context) => {
 
         if (!isGeneratingOne) {      
             const startTime = Date.now()
-            const entities = Object.keys(MODELS).length
+            const entities = Object.keys(MODELS_BACKUPS_NAMES).length
 
             const backup = new BackupModel({
                 Items: 0,
@@ -49,13 +49,13 @@ const GenerateBackup = async (c: Context) => {
 
             const date = BackupDate()
 
-            const { size: sBackups, path: pBackups } = await Backup(FormatModelBackupName(MODELS.BACKUP), date, backups)
-            const { size: sBusinesses, path: pBusinesses } = await Backup(FormatModelBackupName(MODELS.BUSINESS), date, businesses)
-            const { size: sCategories, path: pCategories } = await Backup(FormatModelBackupName(MODELS.CATEGORY), date, categories)
-            const { size: sLogs, path: pLogs } = await Backup(FormatModelBackupName(MODELS.LOG), date, logs)
-            const { size: sSaves, path: pSaves } = await Backup(FormatModelBackupName(MODELS.USER_SAVE), date, saves)
-            const { size: sUsers, path: pUsers } = await Backup(FormatModelBackupName(MODELS.USER), date, users)
-            const { size: sAnalytics, path: pAnalytics } = await Backup(FormatModelBackupName(MODELS.ANALYTIC), date, analytics)
+            const { size: sBackups, path: pBackups } = await Backup(FormatModelBackupName(MODELS_BACKUPS_NAMES.BACKUPS), date, backups)
+            const { size: sBusinesses, path: pBusinesses } = await Backup(FormatModelBackupName(MODELS_BACKUPS_NAMES.BUSINESSES), date, businesses)
+            const { size: sCategories, path: pCategories } = await Backup(FormatModelBackupName(MODELS_BACKUPS_NAMES.CATEGORIES), date, categories)
+            const { size: sLogs, path: pLogs } = await Backup(FormatModelBackupName(MODELS_BACKUPS_NAMES.LOGS), date, logs)
+            const { size: sSaves, path: pSaves } = await Backup(FormatModelBackupName(MODELS_BACKUPS_NAMES.USER_SAVES), date, saves)
+            const { size: sUsers, path: pUsers } = await Backup(FormatModelBackupName(MODELS_BACKUPS_NAMES.USERS), date, users)
+            const { size: sAnalytics, path: pAnalytics } = await Backup(FormatModelBackupName(MODELS_BACKUPS_NAMES.ANALYTICS), date, analytics)
 
             const endTime = Date.now()
             const miliseconds = endTime - startTime

@@ -39,7 +39,7 @@ const SubmitBusiness = async (c: Context) => {
 
                 await UserModel.updateOne(
                     {
-                        _id: ObjectId(business?.User?.toString())
+                        _id: ObjectId(business?.User?._id?.toString())
                     }, 
                     {
                         HasPendingBusinessSubmission: false
