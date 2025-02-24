@@ -40,7 +40,7 @@ const BusinessStructure: Schema<BusinessInterface> = new Schema(
             default: ''
         },
         Logo: {
-            type: String,
+            type: Object,
             required: false,
             unique: false,
             default: null

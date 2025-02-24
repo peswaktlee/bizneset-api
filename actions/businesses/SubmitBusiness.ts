@@ -1,12 +1,22 @@
 import type { Context } from 'hono'
 
+import sharp from 'sharp'
+
 import { DecodeBody, HttpResponder } from '@/helpers/http'
 import { Console } from '@/helpers/logs'
 import { BusinessModel } from '@/data/models'
 import { CurrentTimestamp } from '@/helpers/dates'
 import { ObjectId } from '@/helpers/libs/mongo'
 import { GenerateBusinessSlug } from '@/helpers/generals'
-import { BUSINESS_STATUSES, CONTEXT_KEYS } from '@/data/constants'
+import { UploadToBucket } from '@/helpers/libs/cloudflare'
+
+import { 
+    BUSINESS_STATUSES, 
+    CLOUDFLARE_BUCKETS,
+    CLOUDFLARE_CDN_PATHS, 
+    CONTEXT_KEYS, 
+    FILE_EXTENSIONS 
+} from '@/data/constants'
 
 const SubmitBusiness = async (c: Context) => {
     try {
@@ -18,7 +28,7 @@ const SubmitBusiness = async (c: Context) => {
                 Status: BUSINESS_STATUSES.PENDING
             })
 
-            if (!hasOnPending) {
+            if (hasOnPending) {
                 const { 
                     title, 
                     description,
@@ -34,7 +44,6 @@ const SubmitBusiness = async (c: Context) => {
 
                 const slug = await GenerateBusinessSlug(title)
                 const galleryPhotos = []
-                const logoFormatted = logo?.Media ? logo : null
 
                 for (const photo of gallery) if (photo?.Media) {
                     galleryPhotos.push(photo)
@@ -44,8 +53,8 @@ const SubmitBusiness = async (c: Context) => {
                     Title: title,
                     Description: description,
                     Slug: slug,
-                    Gallery: galleryPhotos,
-                    Logo: logoFormatted,
+                    Gallery: [],
+                    Logo: null,
                     Category: category,
                     User: ObjectId(user?._id),
                     Links: links,
@@ -55,6 +64,73 @@ const SubmitBusiness = async (c: Context) => {
                     Locations: locations,
                     Created_At: CurrentTimestamp()
                 })
+
+                await business.save()
+
+                if (logo) {
+                    let base64 = logo?.Media
+                    const matches = base64.match(/^data:([A-Za-z-+/]+);base64,(.+)$/)
+
+                    if (matches && matches.length === 3) base64 = matches[2]
+                    const base64buffer = Buffer.from(base64, 'base64')
+
+                    const base64pro = await sharp(base64buffer)
+                        .webp({ quality: 100 })
+                        .toBuffer()
+
+                    const pathLogo = `${CLOUDFLARE_CDN_PATHS.BUSINESSES}/${business?._id}/logo.${FILE_EXTENSIONS.WEBP}`
+
+                    const upload = await UploadToBucket({
+                        bucket: CLOUDFLARE_BUCKETS.CDN,
+                        path: pathLogo,
+                        file: base64pro,
+                        type: FILE_EXTENSIONS.WEBP,
+                        publicObject: false
+                    })
+
+                    if (upload) {
+                        const newLogoObject = logo
+                        newLogoObject.Media = null
+                        
+                        business.Logo = newLogoObject
+                        
+                    }
+
+                    else business.Logo = null
+                }
+
+                if (gallery?.length > 0) {
+                    let index = 0
+                    
+                    for (const photo of gallery) {
+                        let base64 = photo?.Media
+                        const matches = base64.match(/^data:([A-Za-z-+/]+);base64,(.+)$/)
+
+                        if (matches && matches.length === 3) base64 = matches[2]
+                        const base64buffer = Buffer.from(base64, 'base64')
+
+                        const base64pro = await sharp(base64buffer)
+                            .webp({ quality: 100 })
+                            .toBuffer()
+
+                        const pathPhoto = `${CLOUDFLARE_CDN_PATHS.BUSINESSES}/${business?._id}/${index + 1}.${FILE_EXTENSIONS.WEBP}`
+                        
+                        const upload = await UploadToBucket({
+                            bucket: CLOUDFLARE_BUCKETS.CDN,
+                            path: pathPhoto,
+                            file: base64pro,
+                            type: FILE_EXTENSIONS.WEBP,
+                            publicObject: false
+                        })
+    
+                        if (upload) {
+                            const newPhotoObject = photo
+                            newPhotoObject.Media = null
+
+                            business.Gallery[index] = newPhotoObject
+                        }
+                    }
+                }
 
                 await business.save()
 
