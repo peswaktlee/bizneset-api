@@ -22,6 +22,16 @@ export const MODELS = {
     ANALYTIC: 'Analytic'
 }
 
+export const MODELS_BACKUPS_NAMES = {
+    BUSINESSES: 'businesses',
+    CATEGORIES: 'categories',
+    LOGS: 'logs',
+    USERS: 'users',
+    USER_SAVES: 'user-saves',
+    BACKUPS: 'backups',
+    ANALYTICS: 'analytics'
+}
+
 export const LOG_TYPES = {
     ERROR: 'error',
     INFO: 'info',
