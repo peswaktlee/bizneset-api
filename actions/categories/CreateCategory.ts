@@ -2,7 +2,7 @@ import type { Context } from 'hono'
 
 import { CategoryModel } from '@/data/models'
 import { DecodeBody, HttpResponder } from '@/helpers/http'
-import { Console } from '@/helpers/logs'
+import { Analytics, Console } from '@/helpers/logs'
 import { CurrentTimestamp } from '@/helpers/dates'
 import { CategoryNameValidation, CategorySlugValidation } from '@/helpers/validations'
 import { CONTEXT_KEYS } from '@/data/constants'
@@ -27,6 +27,12 @@ const CreateCategory = async (c: Context) => {
 
                 if (category) {
                     category.save()
+
+                    setImmediate(async () => {
+                        Analytics.Increase([
+                            'TotalCategories'
+                        ])
+                    })
 
                     return await HttpResponder({
                         c,

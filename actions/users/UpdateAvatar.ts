@@ -8,7 +8,7 @@ import { DeleteFile, UploadToBucket } from '@/helpers/libs/cloudflare'
 import { CurrentTimestamp } from '@/helpers/dates'
 
 import { 
-    CLOUDFLARE_BUCKETS, 
+    CLOUDFLARE_CDN_BUCKET,
     CLOUDFLARE_CDN_PATHS, 
     CONTEXT_KEYS, 
     FILE_EXTENSIONS, 
@@ -25,7 +25,7 @@ const UpdateAvatar = async (c: Context) => {
             const path = `${CLOUDFLARE_CDN_PATHS.AVATARS}/${user._id}.${FILE_EXTENSIONS.WEBP}`
 
             if (avatar) {
-                const deletePreviousAvatar = await DeleteFile(path, CLOUDFLARE_BUCKETS.CDN)
+                const deletePreviousAvatar = await DeleteFile(path, CLOUDFLARE_CDN_BUCKET)
 
                 if (deletePreviousAvatar) {
                     const base64 = avatar
@@ -37,7 +37,7 @@ const UpdateAvatar = async (c: Context) => {
                         .toBuffer()
     
                     const uploaded = await UploadToBucket({
-                        bucket: CLOUDFLARE_BUCKETS.CDN,
+                        bucket: CLOUDFLARE_CDN_BUCKET,
                         path,
                         file: base64pro,
                         type: FILE_TYPES.IMAGE.WEBP,
@@ -78,7 +78,7 @@ const UpdateAvatar = async (c: Context) => {
             }
 
             else {
-                const deletePreviousAvatar = await DeleteFile(path, CLOUDFLARE_BUCKETS.CDN)
+                const deletePreviousAvatar = await DeleteFile(path, CLOUDFLARE_CDN_BUCKET)
 
                 if (deletePreviousAvatar) {
                     user.Avatar = null

@@ -3,7 +3,7 @@ import type { LogInterface } from '@/ts'
 
 import { LogModel } from '@/data/models'
 import { DecodeBody, HttpResponder } from '@/helpers/http'
-import { Console } from '@/helpers/logs'
+import { Analytics, Console } from '@/helpers/logs'
 import { CurrentTimestamp } from '@/helpers/dates'
 import { ObjectId } from '@/helpers/libs/mongo'
 import { CONTEXT_KEYS } from '@/data/constants'
@@ -43,6 +43,12 @@ const InsertLog = async (c: Context) => {
 
         if (log) {
             await log.save()
+
+            setImmediate(async () => {
+                Analytics.Increase([
+                    'TotalLogs'
+                ])
+            })
 
             return await HttpResponder({
                 c,

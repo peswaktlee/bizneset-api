@@ -8,7 +8,7 @@ import { DeleteFile } from '@/helpers/libs/cloudflare'
 
 import { 
     BUSINESS_STATUSES,
-    CLOUDFLARE_BUCKETS, 
+    CLOUDFLARE_CDN_BUCKET,
     CLOUDFLARE_CDN_PATHS, 
     FILE_EXTENSIONS, 
     GALLERY_NUMBER_ITEMS 
@@ -78,7 +78,7 @@ const HandleDeletion = async (business: BusinessInterface, user: UserInterface) 
         for (const path of GALLERY_NUMBER_ITEMS) {
             try {
                 const pathString = `${CLOUDFLARE_CDN_PATHS.BUSINESSES}/${business?._id}/${path}.${FILE_EXTENSIONS.WEBP}`
-                await DeleteFile(pathString, CLOUDFLARE_BUCKETS.CDN)
+                await DeleteFile(pathString, CLOUDFLARE_CDN_BUCKET)
             }
 
             catch (_) {}
@@ -86,7 +86,7 @@ const HandleDeletion = async (business: BusinessInterface, user: UserInterface) 
 
         try {
             const pathLogo = `${CLOUDFLARE_CDN_PATHS.BUSINESSES}/${business?._id}/logo.${FILE_EXTENSIONS.WEBP}`
-            await DeleteFile(pathLogo, CLOUDFLARE_BUCKETS.CDN)
+            await DeleteFile(pathLogo, CLOUDFLARE_CDN_BUCKET)
         }
 
         catch (_) {}

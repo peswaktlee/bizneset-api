@@ -39,6 +39,30 @@ const AnalyticStructure: Schema<AnalyticInterface> = new Schema(
             unique: false,
             default: 0
         },
+        TotalBackups: {
+            type: Number,
+            required: true,
+            unique: false,
+            default: 0
+        },
+        TotalCategories: {
+            type: Number,
+            required: true,
+            unique: false,
+            default: 0
+        },
+        TotalLogs: {
+            type: Number,
+            required: true,
+            unique: false,
+            default: 0
+        },
+        TotalAdmins: {
+            type: Number,
+            required: true,
+            unique: false,
+            default: 0
+        },
         Updated_At: {
             type: Date,
             required: false,
