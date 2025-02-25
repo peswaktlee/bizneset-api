@@ -160,5 +160,9 @@ export interface AnalyticInterface {
     TotalBusinessesReach: number
     TotalUserVisits: number
     TotalBusinessSaves: number
+    TotalBackups: number
+    TotalCategories: number
+    TotalLogs: number
+    TotalAdmins: number
     Updated_At: Date
 }
