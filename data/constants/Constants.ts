@@ -65,11 +65,6 @@ export const ENVIRONMENTS = {
     PROD: 'prod'
 }
 
-export const CLOUDFLARE_BUCKETS = {
-    CDN: 'cdn',
-    BACKUPS: 'backups'
-}
-
 export const CONTEXT_KEYS = {
     UID: 'uid',
     USER: 'user',

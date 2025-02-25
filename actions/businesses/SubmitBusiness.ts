@@ -12,7 +12,7 @@ import { UploadToBucket } from '@/helpers/libs/cloudflare'
 
 import { 
     BUSINESS_STATUSES, 
-    CLOUDFLARE_BUCKETS,
+    CLOUDFLARE_CDN_BUCKET,
     CLOUDFLARE_CDN_PATHS, 
     CONTEXT_KEYS, 
     FILE_EXTENSIONS 
@@ -28,7 +28,7 @@ const SubmitBusiness = async (c: Context) => {
                 Status: BUSINESS_STATUSES.PENDING
             })
 
-            if (hasOnPending) {
+            if (!hasOnPending) {
                 const { 
                     title, 
                     description,
@@ -81,7 +81,7 @@ const SubmitBusiness = async (c: Context) => {
                     const pathLogo = `${CLOUDFLARE_CDN_PATHS.BUSINESSES}/${business?._id}/logo.${FILE_EXTENSIONS.WEBP}`
 
                     const upload = await UploadToBucket({
-                        bucket: CLOUDFLARE_BUCKETS.CDN,
+                        bucket: CLOUDFLARE_CDN_BUCKET,
                         path: pathLogo,
                         file: base64pro,
                         type: FILE_EXTENSIONS.WEBP,
@@ -116,7 +116,7 @@ const SubmitBusiness = async (c: Context) => {
                         const pathPhoto = `${CLOUDFLARE_CDN_PATHS.BUSINESSES}/${business?._id}/${index + 1}.${FILE_EXTENSIONS.WEBP}`
                         
                         const upload = await UploadToBucket({
-                            bucket: CLOUDFLARE_BUCKETS.CDN,
+                            bucket: CLOUDFLARE_CDN_BUCKET,
                             path: pathPhoto,
                             file: base64pro,
                             type: FILE_EXTENSIONS.WEBP,
@@ -129,6 +129,8 @@ const SubmitBusiness = async (c: Context) => {
 
                             business.Gallery[index] = newPhotoObject
                         }
+
+                        index++
                     }
                 }
 

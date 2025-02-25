@@ -1,7 +1,7 @@
 import type { Context } from 'hono'
 
 import { HttpResponder } from '@/helpers/http'
-import { Console } from '@/helpers/logs'
+import { Analytics, Console } from '@/helpers/logs'
 import { FormatModelBackupName } from '@/helpers/generals'
 import { Backup } from '@/helpers/api'
 import { BackupDate, CurrentTimestamp } from '@/helpers/dates'
@@ -95,6 +95,12 @@ const GenerateBackup = async (c: Context) => {
             backup.Finished_Generation_At = CurrentTimestamp()
 
             await backup.save()
+
+            setImmediate(async () => {
+                Analytics.Increase([
+                    'TotalLogs'
+                ])
+            })
 
             return await HttpResponder({
                 c,
