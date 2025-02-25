@@ -42,6 +42,8 @@ const SubmitBusiness = async (c: Context) => {
                     locations
                 } = await DecodeBody(c)
 
+                const locationsFormatted = locations?.slice(0, 10)
+
                 const slug = await GenerateBusinessSlug(title)
                 const galleryPhotos = []
 
@@ -61,7 +63,7 @@ const SubmitBusiness = async (c: Context) => {
                     Website: website,
                     Phone: phone,
                     Email: email,
-                    Locations: locations,
+                    Locations: locationsFormatted,
                     Created_At: CurrentTimestamp()
                 })
 

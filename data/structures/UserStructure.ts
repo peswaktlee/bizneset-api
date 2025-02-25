@@ -73,7 +73,7 @@ const UserStructure: Schema<UserInterface> = new Schema(
             type: Boolean,
             required: false,
             unique: false,
-            default: true
+            default: false
         },
         Notifications: {
             GeneralUpdates: {
