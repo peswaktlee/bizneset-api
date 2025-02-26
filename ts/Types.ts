@@ -192,3 +192,20 @@ export type OnBusinessRejectionProps = {
     businessLink: string
     reasonOfRejection: string
 }
+
+export type StringValidationProps = {
+    value: unknown,
+    min: number | null,
+    max: number | null,
+    noNumbers: boolean,
+    noSpecialCharacters: boolean
+    entityTranslation: TranslationKeys
+}
+
+export type ImageFileInstance = {
+    Id: string
+    Type: null | string
+    Filename: null | string
+    Size: null | number
+    Media: Blob | null
+}
