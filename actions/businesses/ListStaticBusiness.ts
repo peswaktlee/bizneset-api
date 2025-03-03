@@ -3,13 +3,14 @@ import type { Context } from 'hono'
 import { DecodeBody, HttpResponder } from '@/helpers/http'
 import { Console } from '@/helpers/logs'
 import { BusinessModel } from '@/data/models'
+import { BUSINESS_STATUSES } from '@/data/constants'
 
 const ListStaticBusiness = async (c: Context) => {
     try {
         const { slug, selection } = await DecodeBody(c)
 
         const business = await BusinessModel
-            .findOne({ Slug: slug })
+            .findOne({ Slug: slug, Status: BUSINESS_STATUSES.APPROVED })
             .select(selection)
             .lean()
 
